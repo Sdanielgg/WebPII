@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
       case "gamificacao":
         content.innerHTML = `
-          <h2>🏅 Gamificação</h2>
+          <h2>Gamificação</h2>
           <p>Ranking e conquistas:</p>
           <ul>
             <li>Escola Verde - 150 pontos</li>
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
       default:
         content.innerHTML = `
-          <h2>🌿 Bem-vindo</h2>
+          <h2>Bem-vindo</h2>
           <p>Escolha uma secção do menu para começar.</p>
         `;
     }
