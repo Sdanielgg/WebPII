@@ -1,7 +1,8 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const content = document.getElementById("content");
-  const links = document.querySelectorAll("#sidebar a");
+  const links = document.querySelectorAll("#topbar a");
+  const topbar = document.getElementById("topbar");
+  const heroLogo = document.querySelector(".hero-logo");
 
   links.forEach(link => {
     link.addEventListener("click", (e) => {
@@ -13,13 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function loadPage(page) {
     switch (page) {
-      case "dashboard":
-        content.innerHTML = `
-          <h2>Dashboard</h2>
-          <p>Acompanhe o progresso do plano de atividades.</p>
-          <div class="placeholder">Gráficos de progresso e estatísticas aqui.</div>
-        `;
-        break;
       case "atividades":
         content.innerHTML = `
           <h2>Plano de Atividades</h2>
@@ -28,17 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <button>Adicionar</button>
           </form>
           <p>Lista de atividades com filtros...</p>
-        `;
-        break;
-      case "execucao":
-        content.innerHTML = `
-          <h2>Execução das Atividades</h2>
-          <form>
-            <label>Nome da Atividade: <input type="text" /></label>
-            <label>Observações: <textarea></textarea></label>
-            <label>Upload de Fotos: <input type="file" /></label>
-            <button>Registar Execução</button>
-          </form>
         `;
         break;
       case "reunioes":
@@ -50,13 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <label>Atas (upload): <input type="file" /></label>
             <button>Guardar Reunião</button>
           </form>
-        `;
-        break;
-      case "relatorio":
-        content.innerHTML = `
-          <h2>Relatório Final</h2>
-          <p>Gerar relatório com os dados recolhidos.</p>
-          <button>Exportar Relatório</button>
         `;
         break;
       case "utilizadores":
@@ -76,24 +52,22 @@ document.addEventListener("DOMContentLoaded", () => {
           </form>
         `;
         break;
-      case "gamificacao":
-        content.innerHTML = `
-          <h2>Gamificação</h2>
-          <p>Ranking e conquistas:</p>
-          <ul>
-            <li>Escola Verde - 150 pontos</li>
-            <li>Escola Sustentável - 120 pontos</li>
-            <li>Escola Iniciativa - 90 pontos</li>
-          </ul>
-        `;
-        break;
       default:
-        content.innerHTML = `
-          <h2>Bem-vindo</h2>
-          <p>Escolha uma secção do menu para começar.</p>
-        `;
+        content.innerHTML = ``;
     }
   }
 
-  loadPage("dashboard");
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+
+    if (scrollY > 100) {
+      topbar.classList.add("visible");
+      heroLogo.classList.add("hidden");
+    } else {
+      topbar.classList.remove("visible");
+      heroLogo.classList.remove("hidden");
+    }
+  });
+
+  loadPage("");
 });

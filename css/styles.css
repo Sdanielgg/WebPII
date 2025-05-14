@@ -13,51 +13,48 @@ body, html {
 
 #app {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  flex-direction: column;
 }
 
-@media (min-width: 768px) {
-  #app {
-    flex-direction: row;
-  }
-}
-
-#sidebar {
-  background: linear-gradient(to bottom, #2e7d32, #1b5e20);
+#topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(to right, #2e7d32, #1b5e20);
   color: white;
-  width: 240px;
-  padding: 30px 20px;
+  padding: 20px;
   display: flex;
-  flex-direction: column;
-  gap: 30px;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: space-between;
+  transition: box-shadow 0.3s ease;
 }
 
-#sidebar .logo {
-  font-size: 1.6rem;
+#topbar.scrolled {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+#topbar .logo {
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 1rem;
 }
 
-#sidebar ul {
+#topbar nav ul {
   list-style: none;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
-#sidebar ul li a {
+#topbar nav ul li a {
   color: white;
   text-decoration: none;
   font-size: 1rem;
-  padding: 10px 15px;
-  border-radius: 8px;
+  padding: 8px 14px;
+  border-radius: 6px;
   transition: background 0.3s;
-  display: block;
 }
 
-#sidebar ul li a:hover {
+#topbar nav ul li a:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
 
@@ -67,20 +64,151 @@ body, html {
   background-color: #f9fafc;
 }
 
-header {
-  margin-bottom: 30px;
-}
-
-header h1 {
-  font-size: 2rem;
-  color: #2e7d32;
-  font-weight: 600;
-}
-
 #content {
   background: white;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   min-height: 300px;
+}
+
+#hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  padding: 60px;
+  background: url('../Images/Dashboard_Placeholder.jpeg') no-repeat center center/cover;
+  color: white;
+  position: relative;
+}
+
+.hero-logo {
+  font-size: 4rem;
+  font-weight: 800;
+  flex: 1;
+  transition: all 0.4s ease;
+}
+
+.hero-logo.hidden {
+  opacity: 0;
+  transform: scale(0.5) translateY(-50px);
+  pointer-events: none;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 500px;
+  text-align: right;
+}
+
+.hero-text h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.hero-text .button {
+  background-color: #ffffff;
+  color: #1b5e20;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.hero-text .button:hover {
+  background-color: #e0e0e0;
+}
+
+#quem-somos {
+  background: white;
+  padding: 60px 30px;
+  border-top: 2px solid #e0e0e0;
+}
+
+#quem-somos h2 {
+  font-size: 2rem;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+#quem-somos p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+#topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: linear-gradient(to right, #2e7d32, #1b5e20);
+  color: white;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition: all 0.4s ease;
+}
+
+#topbar.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+
+#topbar .logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+  transition: font-size 0.3s ease;
+}
+
+#topbar.scrolled .logo {
+  font-size: 1rem;
+}
+
+#topbar nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+#topbar nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+#topbar nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+#main-content {
+  flex: 1;
+  background-color: #f9fafc;
+}
+
+#content {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  min-height: 300px;
+  margin: 30px;
 }
