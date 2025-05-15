@@ -34,10 +34,23 @@ body, html {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
-#topbar .logo {
-  font-size: 1.4rem;
-  font-weight: 600;
+
+
+.logo-img-large {
+  height: 400px;
+  transition: all 0.4s ease;
 }
+
+.logo-img-small {
+  height: 55px;
+  transition: all 0.3s ease;
+}
+
+.hero-logo.hidden img {
+  opacity: 0;
+  transform: scale(0.5) translateY(-50px);
+}
+
 
 #topbar nav ul {
   list-style: none;
@@ -77,7 +90,7 @@ body, html {
   justify-content: space-between;
   align-items: center;
   min-height: 100vh;
-  padding: 60px;
+  padding: 50px;
   background: url('../Images/Dashboard_Placeholder.jpeg') no-repeat center center/cover;
   color: white;
   position: relative;
