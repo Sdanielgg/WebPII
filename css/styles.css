@@ -90,8 +90,13 @@ body, html {
   justify-content: space-between;
   align-items: center;
   min-height: 100vh;
+<<<<<<< Updated upstream
   padding: 50px;
   background: url('../Images/Dashboard_Placeholder.jpeg') no-repeat center center/cover;
+=======
+  padding: 60px;
+  background: url('../Images/planta_fundo.webp') no-repeat center center/cover;
+>>>>>>> Stashed changes
   color: white;
   position: relative;
 }
