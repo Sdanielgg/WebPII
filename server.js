@@ -9,6 +9,7 @@ const host = process.env.HOST;
 
 
 app.use(express.json());
+const db = require('./models/db');
 
 // middleware for ALL routes
 app.use((req, res, next) => {
