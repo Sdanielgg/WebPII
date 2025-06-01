@@ -21,6 +21,9 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use('/auth', require('./routes/auth.routes.js'));
+app.use('/users', require('./routes/users.routes.js'));
+
 
 // use route middleware for /posts requests
 app.use('/posts', require('./routes/posts.routes.js'));
@@ -41,6 +44,8 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     // !Uncomment this line to log the error details to the server console!
     console.error(err);
+
+    
 
     // error thrown by express.json() middleware when the request body is not valid JSON
     if (err.type === 'entity.parse.failed')
@@ -85,3 +90,4 @@ app.use((err, req, res, next) => {
 app.listen(port, host, () => {
     console.log(`App listening at http://${host}:${port}/`);
 });
+

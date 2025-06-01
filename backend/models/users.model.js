@@ -1,32 +1,30 @@
-module.exports = (sequelize, DataTypes) => {
-   const User = sequelize.define('User', {
-      username: {
-         type: DataTypes.STRING,
-         // validate unique username (indicate value)
-         unique: {
-            args: true,
-            msg: 'Username already exists'
-         },
-         allowNull: false
-      },
-      password: {
-         type: DataTypes.STRING,
-         allowNull: false
-      },
-      role: {
-         type: DataTypes.ENUM('admin', 'editor'),
-         allowNull: false,
-         //add enum validation
-         validate: {
-            isIn: {
-               args: [['admin', 'editor']],
-               msg: "Role must be one of the following: admin or editor"
-            }
-         }
-      },
-   }, {
-      timestamps: false // Do not add createdAt and updatedAt fields
-   });
+const { DataTypes } = require('sequelize');
+const sequelize = require('./db');
 
-   return User;
-}
+const User = sequelize.define('User', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  nome: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
+    validate: { isEmail: true },
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  role: {
+    type: DataTypes.ENUM('admin', 'coordenador', 'membro', 'secretariado', 'visitante'),
+    defaultValue: 'visitante',
+  }
+});
+
+module.exports = User;
