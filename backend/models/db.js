@@ -54,15 +54,12 @@ db.Tag.belongsToMany(db.Post, {
 });
 
 
-// // OPTIONAL: synchronize the DB with the sequelize model
-// (async () => {
-//     try {
-//         await db.sequelize.sync({ alter: true });
-//         console.log('DB is successfully synchronized')
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })();
-
+db.sequelize.sync({ alter: true })
+  .then(() => {
+    console.log("✅ Tabelas sincronizadas com sucesso.");
+  })
+  .catch((err) => {
+    console.error("❌ Erro ao sincronizar as tabelas:", err);
+  });
 
 module.exports = db; //export the db object with the sequelize instance and models
