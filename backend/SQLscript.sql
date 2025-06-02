@@ -2,39 +2,38 @@ CREATE TABLE Utilizador (
     idUtilizador INT PRIMARY KEY AUTO_INCREMENT,
     nomeUtilizador VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    cargo VARCHAR(50),
-    email VARCHAR(150),
+    cargo ENUM('administrador', 'Membros do Concelho', 'coordenador', 'secretariado') DEFAULT 'Utilizador',
+    email VARCHAR(150),x
     medalhas TEXT
 );
-
-CREATE TABLE Posts (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(50) NOT NULL,
-  description VARCHAR(255) NOT NULL,
-  published BOOLEAN DEFAULT FALSE,
-  views INT UNSIGNED DEFAULT 0,
-  publishedAt DATETIME DEFAULT NOW(),
-  author INT NOT NULL,
-  FOREIGN KEY (author) REFERENCES Users(id) ON DELETE CASCADE
+CREATE TABLE Reuniao (
+    idReuniao INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    data DATETIME DEFAULT CURRENT_TIMESTAMP,
+    local VARCHAR(150),
+    ata VARCHAR(255),
+    fotos TEXT,
+    convidados TEXT,
+    estado ENUM('Por começar', 'Em progresso', 'Acabada') DEFAULT 'Por começar'
 );
 
-CREATE TABLE Tags (
-  name VARCHAR(50) PRIMARY KEY
+CREATE TABLE Atividades (
+    idAtividade INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    local VARCHAR(150),
+    data DATETIME DEFAULT CURRENT_TIMESTAMP,
+    descricao TEXT,
+    responsavel TEXT,
+    inscritos TEXT,
+    fotos TEXT,
+    estado ENUM('Ainda não foi realizada', 'Em progresso', 'Realizada') DEFAULT 'Ainda não foi realizada'
 );
 
-CREATE TABLE PostTags (
-  PostId INT,
-  TagName VARCHAR(50),
-  PRIMARY KEY (PostId, TagName),
-  FOREIGN KEY (PostId) REFERENCES Posts(id) ON DELETE CASCADE,
-  FOREIGN KEY (TagName) REFERENCES Tags(name) ON DELETE CASCADE
-);
 
-INSERT INTO Users (username, password, role) VALUES
-('bruno_admin', 'adminpass', 'admin'),
-('carla_writer', 'passw0rd', 'editor'),
-('ana_dev', '123456', 'editor');
 
+INSERT INTO Utilizadores (nomeUtilizador, password, cargo,email) VALUES
+('admin', 'Esmad', 'Administrador','admin@eco.com'),
+('utilizador', 'Esmad', 'Utilizador','utilizador@eco.com');
 
 INSERT INTO Posts (title, description, published, views, publishedAt, author) VALUES
 ('Introdução ao Node.js', 'Aprende os conceitos base de Node.js', true, 120, '2024-12-10', 1),
@@ -42,13 +41,7 @@ INSERT INTO Posts (title, description, published, views, publishedAt, author) VA
 ('Melhores práticas de segurança', 'Dicas para proteger as tuas apps web', true, 35, '2025-02-20', 1);
 
 
-INSERT INTO Tags (name) VALUES
-('node'),
-('backend'),
-('frontend'),
-('api'),
-('segurança'),
-('tutorial');
+
 
 -- Post 1: Introdução ao Node.js
 INSERT INTO PostTags (PostId, TagName) VALUES (1, 'node'), (1, 'tutorial');
