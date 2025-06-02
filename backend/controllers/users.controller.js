@@ -1,5 +1,5 @@
 const db = require('../models/db.js'); // Import the database connection
-const User = db.User; // Import the User model from the database connection
+const User = db.Utilizador; // Import the User model from the database connection
 
 const { ErrorHandler } = require("../utils/error.js"); // Import the ErrorHandler class for error handling
 
