@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     cargo: {
-      type: DataTypes.ENUM('administrador', 'Membros do Concelho', 'coordenador', 'secretariado'),
-      defaultValue: 'secretariado',
+      type: DataTypes.ENUM('administrador', 'Membros do Concelho', 'coordenador', 'secretariado', 'Utilizador'),
+      defaultValue: 'Utilizador',
     },
     medalhas: {
       type: DataTypes.STRING,

@@ -32,10 +32,10 @@ const db = {}; //object to be exported
 db.sequelize = sequelize; //save the Sequelize instance (actual connection pool)
 
 // include models here
-db.Post = require('./posts.model.js')(sequelize, Sequelize.DataTypes); 
+db.Post = require('./atividades.model.js')(sequelize, Sequelize.DataTypes); 
 
 //new models: user and tag
-db.User = require("./users.model.js")(sequelize, Sequelize.DataTypes);
+db.User = require("./utilizador.model.js")(sequelize, Sequelize.DataTypes);
 db.Tag = require("./tags.model.js")(sequelize, Sequelize.DataTypes);
 
 //define the relationships
