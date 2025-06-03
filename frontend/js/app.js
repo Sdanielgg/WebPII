@@ -1,23 +1,25 @@
-function toggleMenu() {
-  document.getElementById('sideMenu').classList.toggle('open');
-}
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("JavaScript carregado com sucesso!");
 
-// Fechar menu com tecla ESC
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    document.getElementById('sideMenu').classList.remove('open');
-  }
+  // Animação simples ao rolar a página
+  const sections = document.querySelectorAll("section");
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  sections.forEach(section => {
+    section.style.opacity = 0;
+    section.style.transform = "translateY(30px)";
+    section.style.transition = "all 0.6s ease-out";
+    observer.observe(section);
+  });
 });
-
-// Fechar menu ao clicar fora
-document.addEventListener('click', function (e) {
-  const menu = document.getElementById('sideMenu');
-  const button = document.querySelector('.menu-button');
-  if (!menu.contains(e.target) && !button.contains(e.target)) {
-    menu.classList.remove('open');
-  }
-});
-
-  function toggleMenu() {
-    document.getElementById('sideMenu').classList.toggle('open');
-  }
