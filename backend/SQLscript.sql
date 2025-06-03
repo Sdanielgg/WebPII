@@ -2,8 +2,8 @@ CREATE TABLE Utilizador (
     idUtilizador INT PRIMARY KEY AUTO_INCREMENT,
     nomeUtilizador VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    cargo ENUM('administrador', 'Membros do Concelho', 'coordenador', 'secretariado') DEFAULT 'Utilizador',
-    email VARCHAR(150),x
+    cargo ENUM('Utilizador','administrador', 'Membros do Concelho', 'coordenador', 'secretariado') DEFAULT 'Utilizador',
+    email VARCHAR(150),
     medalhas TEXT
 );
 CREATE TABLE Reuniao (
@@ -29,25 +29,37 @@ CREATE TABLE Atividades (
     estado ENUM('Ainda não foi realizada', 'Em progresso', 'Realizada') DEFAULT 'Ainda não foi realizada'
 );
 
+CREATE TABLE Fotos(
+    idFoto INT PRIMARY KEY AUTO_INCREMENT,
+    url VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    data DATETIME DEFAULT CURRENT_TIMESTAMP,
+    idAtividade INT NOT NULL,
+    FOREIGN KEY (idAtividade) REFERENCES Atividades(idAtividade)
+);
+CREATE TABLE medalhas(
+    idMedalha INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    imagem VARCHAR(255),
+    idUtilizador INT NOT NULL,
+    FOREIGN KEY (idUtilizador) REFERENCES Utilizador(idUtilizador)
+);
 
-
-INSERT INTO Utilizadores (nomeUtilizador, password, cargo,email) VALUES
+CREATE TABLE inscritos_atividades (
+    idInscricao INT PRIMARY KEY AUTO_INCREMENT,
+    idUtilizador INT NOT NULL,
+    idAtividade INT NOT NULL,
+    FOREIGN KEY (idUtilizador) REFERENCES Utilizador(idUtilizador),
+    FOREIGN KEY (idAtividade) REFERENCES Atividades(idAtividade)
+);
+CREATE TABLE inscritos_reunioes (
+    idInscricao INT PRIMARY KEY AUTO_INCREMENT,
+    idUtilizador INT NOT NULL,
+    idReuniao INT NOT NULL,
+    FOREIGN KEY (idUtilizador) REFERENCES Utilizador(idUtilizador),
+    FOREIGN KEY (idReuniao) REFERENCES Reuniao(idReuniao)
+);
+INSERT INTO Utilizador (nomeUtilizador, password, cargo,email) VALUES
 ('admin', 'Esmad', 'Administrador','admin@eco.com'),
-('utilizador', 'Esmad', 'Utilizador','utilizador@eco.com');
-
-INSERT INTO Posts (title, description, published, views, publishedAt, author) VALUES
-('Introdução ao Node.js', 'Aprende os conceitos base de Node.js', true, 120, '2024-12-10', 1),
-('Como criar uma API REST', 'Tutorial completo para iniciantes', false, 0, NULL, 3),
-('Melhores práticas de segurança', 'Dicas para proteger as tuas apps web', true, 35, '2025-02-20', 1);
-
-
-
-
--- Post 1: Introdução ao Node.js
-INSERT INTO PostTags (PostId, TagName) VALUES (1, 'node'), (1, 'tutorial');
-
--- Post 2: Como criar uma API REST
-INSERT INTO PostTags (PostId, TagName) VALUES (2, 'node'), (2, 'backend'), (2, 'api'), (2, 'tutorial');
-
--- Post 3: Melhores práticas de segurança
-INSERT INTO PostTags (PostId, TagName) VALUES (3, 'backend'), (3, 'segurança');
+('utilizador', 'Esmad', DEFAULT,'utilizador@eco.com');
