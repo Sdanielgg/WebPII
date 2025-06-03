@@ -1,4 +1,9 @@
-DROP TABLE IF EXISTS Users;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Drop tables in order that avoids FK conflicts
+DROP TABLE IF EXISTS PostTags;
+DROP TABLE IF EXISTS Posts;
+DROP TABLE IF EXISTS Tags;
 DROP TABLE IF EXISTS inscritos_reunioes;
 DROP TABLE IF EXISTS inscritos_atividades;
 DROP TABLE IF EXISTS medalhas;
@@ -11,10 +16,9 @@ DROP TABLE IF EXISTS Utilizador;
 CREATE TABLE Utilizador (
     idUtilizador INT PRIMARY KEY AUTO_INCREMENT,
     nomeUtilizador VARCHAR(100) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    cargo ENUM('Utilizador','administrador', 'Membros do Concelho', 'coordenador', 'secretariado') DEFAULT 'Utilizador',
-    email VARCHAR(150),
-    medalhas TEXT
+    `password` VARCHAR(255) NOT NULL,
+    cargo ENUM('Utilizador', 'administrador', 'Membros do Concelho', 'coordenador', 'secretariado') DEFAULT 'Utilizador',
+    email VARCHAR(150)
 );
 
 -- Create Reunioes table
@@ -24,8 +28,6 @@ CREATE TABLE Reunioes (
     data DATETIME DEFAULT CURRENT_TIMESTAMP,
     local VARCHAR(150),
     ata VARCHAR(255),
-    fotos TEXT,
-    convidados TEXT,
     estado ENUM('Por começar', 'Em progresso', 'Acabada') DEFAULT 'Por começar'
 );
 
@@ -36,10 +38,9 @@ CREATE TABLE Atividades (
     local VARCHAR(150),
     data DATETIME DEFAULT CURRENT_TIMESTAMP,
     descricao TEXT,
-    responsavel TEXT,
-    inscritos TEXT,
-    fotos TEXT,
-    estado ENUM('Ainda não foi realizada', 'Em progresso', 'Realizada') DEFAULT 'Ainda não foi realizada'
+    idResponsavel INT,
+    estado ENUM('Ainda não foi realizada', 'Em progresso', 'Realizada') DEFAULT 'Ainda não foi realizada',
+    FOREIGN KEY (idResponsavel) REFERENCES Utilizador(idUtilizador)
 );
 
 -- Create Fotos table
@@ -48,8 +49,10 @@ CREATE TABLE Fotos (
     url VARCHAR(255) NOT NULL,
     descricao TEXT,
     data DATETIME DEFAULT CURRENT_TIMESTAMP,
-    idAtividade INT NOT NULL,
-    FOREIGN KEY (idAtividade) REFERENCES Atividades(idAtividade)
+    idAtividade INT,
+    idReuniao INT,
+    FOREIGN KEY (idAtividade) REFERENCES Atividades(idAtividade),
+    FOREIGN KEY (idReuniao) REFERENCES Reunioes(idReuniao)
 );
 
 -- Create medalhas table
@@ -80,7 +83,7 @@ CREATE TABLE inscritos_reunioes (
     FOREIGN KEY (idReuniao) REFERENCES Reunioes(idReuniao)
 );
 
--- Insert sample data into Utilizador table with correct enum values
-INSERT INTO Utilizador (nomeUtilizador, password, cargo, email) VALUES
+-- Insert sample data into Utilizador
+INSERT INTO Utilizador (nomeUtilizador, `password`, cargo, email) VALUES
 ('admin', 'Esmad', 'administrador', 'admin@eco.com'),
 ('utilizador', 'Esmad', 'Utilizador', 'utilizador@eco.com');
