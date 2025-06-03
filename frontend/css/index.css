@@ -250,3 +250,141 @@ section.login-split {
   max-width: 100%;
   border-radius: 10px;
 }
+/* Estatísticas */
+.estatisticas {
+  background-color: #f0f7f1;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.estatisticas h2 {
+  margin-bottom: 2rem;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.stats div {
+  font-size: 1.5rem;
+  color: #2e7d32;
+}
+
+.counter {
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: block;
+  color: #145a32;
+}
+
+/* Testemunhos */
+.testemunhos {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.carousel {
+  position: relative;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slide {
+  display: none;
+  font-size: 1.2rem;
+  transition: opacity 0.5s;
+}
+
+.slide.active {
+  display: block;
+}
+.login-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.login-left, .login-center, .login-right {
+  flex: 1;
+  min-width: 250px;
+}
+
+.login-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.login-left form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+}
+
+.login-left input {
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.login-left button {
+  background-color: #2ecc71;
+  color: white;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Testemunhos (carousel fixo) */
+.login-center .carousel {
+  position: relative;
+  max-width: 100%;
+  min-height: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 1rem;
+  background-color: #f0f7f1;
+  border-radius: 10px;
+}
+
+.login-center .slide {
+  display: none;
+  width: 100%;
+  transition: opacity 0.5s ease;
+}
+
+.login-center .slide.active {
+  display: block;
+}
+
+.login-center strong {
+  display: block;
+  margin-top: 0.5rem;
+  color: #2e7d32;
+}
+
+/* Lado direito */
+.login-right {
+  text-align: center;
+}
+
+.login-right img {
+  max-width: 100px;
+  opacity: 0.8;
+}
