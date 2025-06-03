@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Inscritos = sequelize.define("Inscritos", {
+  const Medalhas = sequelize.define("Medalhas", {
     IdUtilizador: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: "CASCADE"
     },
-    IdAtividade: {
+    ID_Atividade: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

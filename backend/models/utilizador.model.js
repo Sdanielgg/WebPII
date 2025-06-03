@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Utilizador = sequelize.define('Utilizador', {
-    idUtilizador: {
+    IdUtilizador: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
@@ -23,12 +23,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM('administrador', 'Membros do Concelho', 'coordenador', 'secretariado', 'Utilizador'),
       defaultValue: 'Utilizador',
     },
-    medalhas: {
-      type: DataTypes.STRING,
-      defaultValue: "",
-    },
+    
+  },{
+    timestamps: false,
+    tableName: 'Utilizadores', // Specify the table name explicitly
   });
-
+  
   return Utilizador;
 };
 // This code defines a Sequelize model for a "Utilizador" (User) entity in a database.

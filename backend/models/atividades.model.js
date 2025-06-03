@@ -1,23 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
   const Atividades = sequelize.define('Atividades', {
-    ID_Atividade: {
+    IdAtividade: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    titulo_Atividade: {
+    titulo:{
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    local_Atividade: {
+    local: {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    data_Atividade: {
+    data: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    descrição_Atividade: {
+    descrição: {
       type: DataTypes.TEXT,
       allowNull: false
     },

@@ -1,10 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
    const Reuniao = sequelize.define("Reuniao", {
-       name: {
-           primaryKey: true,
-           type: DataTypes.STRING,
-       },
        titulo: {
+            primaryKey: true,   
            type: DataTypes.STRING,
            allowNull: false,
            validate: {

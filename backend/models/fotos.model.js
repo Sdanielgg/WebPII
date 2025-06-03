@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
            primaryKey: true,
            type: DataTypes.STRING,
        },
-       id: {
+       title: {
            type: DataTypes.STRING,
            allowNull: false,
            validate: {
@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
            allowNull: false,
            validate: {
                isDate: true,
+               notEmpty: true
+           }
+       },
+       url: {
+           type: DataTypes.STRING,
+           allowNull: false,
+           validate: {
+               isUrl: true,
                notEmpty: true
            }
        },
