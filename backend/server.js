@@ -1,7 +1,9 @@
+require('dotenv').config();
+console.log("Loaded ENV config:");
+
 const express = require('express');
 
 // read environment variables from .env file
-require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT;	// use environment variables
@@ -26,10 +28,10 @@ app.use('/users', require('./routes/users.routes.js'));
 
 
 // use route middleware for /posts requests
-app.use('/posts', require('./routes/posts.routes.js'));
+app.use('/posts', require('./routes/atividades.routes.js'));
 
 // use route middleware for /tags requests
-app.use('/tags', require('./routes/tags.routes.js'));
+app.use('/tags', require('./routes/reunioes.routes.js'));
 
 // use route middleware for /users requests
 app.use('/users', require('./routes/users.routes.js'));
@@ -44,13 +46,13 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     // !Uncomment this line to log the error details to the server console!
     console.error(err);
-
     
-
+    
+    
     // error thrown by express.json() middleware when the request body is not valid JSON
     if (err.type === 'entity.parse.failed')
         return res.status(400).json({ error: 'Invalid JSON payload! Check if your body data is a valid JSON.' });
-
+    
     // Sequelize validation errors (ALL models)
     if (err.name === 'SequelizeValidationError' || err.name === 'SequelizeUniqueConstraintError') {
         return res.status(400).json({
@@ -61,7 +63,7 @@ app.use((err, req, res, next) => {
             }))
         });
     }
-
+    
     // SequelizeDatabaseError related to an invalid ENUM value (USERS table -> role field)
     if (err.name === 'SequelizeDatabaseError') {
         if (err.original.code === 'ER_CHECK_CONSTRAINT_VIOLATED') {
@@ -91,3 +93,4 @@ app.listen(port, host, () => {
     console.log(`App listening at http://${host}:${port}/`);
 });
 
+console.log("DB_DIALECT:", process.env.DB_DIALECT);
