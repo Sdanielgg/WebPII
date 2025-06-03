@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: "CASCADE"
     },
-    ID_Atividade: {
+    IdAtividade: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -17,6 +17,14 @@ module.exports = (sequelize, DataTypes) => {
         key: "IdAtividade"
       },
       onDelete: "CASCADE"
+    },
+    nomeMedalha:{
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    dataMedalha: {
+      type: DataTypes.DATE,
+      allowNull: false
     },
   }, {
     timestamps: false,
