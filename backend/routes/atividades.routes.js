@@ -13,7 +13,7 @@ router.put('/:id', atividadesController.updateAtividade);
 router.delete('/:id', atividadesController.deleteAtividade);
 
 // NEW ROUTES FOR TAGS IN atividades
-router.post('/:id/tags/:tag', atividadesController.addTagToAtividade); // add a tag to an atividade
-router.delete('/:id/tags/:tag', atividadesController.deleteTagFromAtividade); // delete a tag from an atividade
+router.post('/:id/reunioes/:reuniao', atividadesController.addTagToAtividade); // add a tag to an atividade
+router.delete('/:id/reunioes/:reuniao', atividadesController.deleteTagFromAtividade); // delete a tag from an atividade
 
 module.exports = router;

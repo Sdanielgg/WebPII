@@ -1,45 +1,48 @@
 module.exports = (sequelize, DataTypes) => {
-   const Post = sequelize.define('Post', {
-      title: {
-         type: DataTypes.STRING,
-         allowNull: false,
-         validate: {
-            len: { args: [5, 50], msg: "Title must have between 5 to 50 characters."}
-         }
-      },
-      description: {
-         type: DataTypes.TEXT,
-         allowNull: false
-      },
-      published: {
-         type: DataTypes.BOOLEAN,
-         defaultValue: false,
-         // validate if is boolean
-         validate: {
-            isBoolean: function(value) {
-               if (typeof value !== 'boolean') {
-                  throw new Error('Published must be a boolean value.');
-               }
-            }
-         }
-      },
-      views: {
-         type: DataTypes.INTEGER.UNSIGNED,
-         defaultValue: 0,
-         validate: {
-            min: {
-               args: [0],
-               msg: "Views must be a non-negative integer."
-            }
-         }
-      },
-      publishedAt: {
-         type: DataTypes.DATE,
-         defaultValue: DataTypes.NOW
+  const Atividades = sequelize.define('Atividades', {
+    ID_Atividade: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    titulo_Atividade: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    local_Atividade: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    data_Atividade: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    descrição_Atividade: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    responsavel: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Utilizadors',
+        key: 'ID_Utilizador'
       }
-   }, {
-      timestamps: false // Do not add createdAt and updatedAt fields
-   });
+    },
+    inscritos: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      defaultValue: 0,
+      validate: {
+        min: {
+          args: [0],
+          msg: "Inscritos deve ser um número positivo."
+        }
+      }
+    }
+  }, {
+    tableName: 'Atividades',
+    timestamps: false
+  });
 
-   return Post;
-}
+  return Atividades;
+};
