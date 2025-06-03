@@ -5,15 +5,15 @@ const router = express.Router();
 // include controller functions
 const atividadesController = require('../controllers/atividades.controller.js');
 
-router.get('/', atividadesController.getAllatividades);
-router.get('/:id', atividadesController.getPostById);
+router.get('/', atividadesController.getAllAtividades);
+router.get('/:id', atividadesController.getAtividadeById);
 
-router.post('/',  atividadesController.addPost);
-router.put('/:id', atividadesController.updatePost);
-router.delete('/:id', atividadesController.deletePost);
+router.post('/', atividadesController.addAtividade);
+router.put('/:id', atividadesController.updateAtividade);
+router.delete('/:id', atividadesController.deleteAtividade);
 
 // NEW ROUTES FOR TAGS IN atividades
-router.put('/:id/tags/:tag', atividadesController.addTagToPost); // add a tag to a post
-router.delete('/:id/tags/:tag', atividadesController.deleteTagFromPost); // delete a tag from a post
+router.post('/:id/tags/:tag', atividadesController.addTagToAtividade); // add a tag to an atividade
+router.delete('/:id/tags/:tag', atividadesController.deleteTagFromAtividade); // delete a tag from an atividade
 
-module.exports = router;    
+module.exports = router;
