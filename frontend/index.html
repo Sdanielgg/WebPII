@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-<button class="menu-button" onclick="toggleMenu()">☰</button>
+  <button class="menu-button" onclick="toggleMenu()" aria-label="Abrir menu de navegação">☰</button>
 
   <div class="side-menu" id="sideMenu">
     <a href="index.html">Início</a>
@@ -24,15 +24,25 @@
     <div class="content">
       <h1>Eco-Escolas — ESMAD</h1>
       <p>Unimos sustentabilidade e educação para construir um futuro mais verde. Descobre o nosso projeto.</p>
-      <a href="quemsomos.html">Saber mais →</a>
+      <a href="quem-somos.html">Saber mais →</a>
     </div>
   </header>
 
-  <section class="login">
-    <img src="user-icon.png" alt="Utilizador">
-    <p>Faz parte da mudança! Cria uma conta para poderes participar em atividades, reuniões e contribuir para o nosso relatório ambiental.</p>
-    <a href="login.html">Entrar / Criar Conta →</a>
-  </section>
+<section class="login-split">
+  <div class="login-left">
+    <h2>Entrar</h2>
+    <input type="text" placeholder="Email" />
+    <input type="password" placeholder="Palavra-passe" />
+    <button>Entrar</button>
+  </div>
+  <div class="login-right">
+    <h3>Faz parte da mudança!</h3>
+    <p>Contribui para um ambiente mais sustentável com as nossas atividades, reuniões e ações locais.</p>
+    <img src="./Images/esmad-mapa.png" alt="Natureza" />
+  </div>
+</section>
+
+
 
   <section class="atividades">
     <h2 style="text-align:center; margin-bottom:2rem;">Últimas Atividades</h2>
@@ -58,10 +68,7 @@
   <footer>
     <p>&copy; 2025 Eco-Escolas — ESMAD. Todos os direitos reservados.</p>
   </footer>
-    <script>
-    function toggleMenu() {
-      document.getElementById('sideMenu').classList.toggle('open');
-    }
-  </script>
+
+  <script src="./js/app.js"></script>
 </body>
 </html>
