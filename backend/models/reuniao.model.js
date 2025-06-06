@@ -16,6 +16,15 @@ module.exports = (sequelize, DataTypes) => {
                notEmpty: true
            }
        },
+        Criador: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+            model: "Utilizadores", 
+            key: "IdUtilizador"
+            },
+            onDelete: "CASCADE"
+        },
        local: {
            type: DataTypes.STRING,
            allowNull: false,
@@ -40,5 +49,11 @@ module.exports = (sequelize, DataTypes) => {
        timestamps: false,
        tableName: 'Reuniao', // Specify the table name explicitly
    });
+   Reuniao.associate = (models) => {
+       Reuniao.belongsTo(models.Utilizador, {
+           foreignKey: 'responsavel',
+           as: 'creator'
+       });
+   };
    return Reuniao;
 };

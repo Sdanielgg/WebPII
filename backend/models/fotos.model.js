@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
               },
               onDelete: 'CASCADE'
          },
-       title: {
+       titulo: {
            type: DataTypes.STRING,
            allowNull: false,
            validate: {
