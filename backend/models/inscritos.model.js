@@ -27,4 +27,5 @@ const Inscritos = sequelize.define("Inscritos", {
   timestamps: false,
   tableName: "Inscritos"
 });
-}
+return Inscritos;
+};

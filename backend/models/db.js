@@ -9,7 +9,7 @@ require('dotenv').config();
     {
       host: process.env.DB_HOST,
       dialect: process.env.DB_DIALECT,
-      logging: true,
+      logging: false,
     }
   );
 
@@ -34,8 +34,9 @@ const Reuniao = require('./reuniao.model')(sequelize, DataTypes);
     Reuniao,
   };
 
-Object.entries(db).forEach(([key, model]) => {
-  if (typeof model === 'object' && model !== null && model.associate instanceof Function) {
+  
+Object.values(db).forEach(model => {
+  if (model.associate) {
     model.associate(db);
   }
 });

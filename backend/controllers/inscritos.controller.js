@@ -22,6 +22,17 @@ let getInscritosByAtividadeId = async (req, res, next) => {
   }
 };
 
+const getAllInscritos = async (req, res) => {
+  try {
+    const inscritos = await Inscritos.findAll();
+    res.status(200).json(inscritos);
+  } catch (error) {
+    console.error('Erro ao buscar inscritos:', error);
+    res.status(500).json({ error: 'Erro ao buscar inscritos' });
+  }
+};
+
 module.exports = {
-    getInscritosByAtividadeId
+    getInscritosByAtividadeId,
+    getAllInscritos
 }

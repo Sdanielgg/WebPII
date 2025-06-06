@@ -27,7 +27,20 @@ module.exports = (sequelize, DataTypes) => {
   },{
     timestamps: false,
     tableName: 'Utilizadores', // Specify the table name explicitly
-  });
+  }); 
+  Utilizador.associate = (models) => {
+
+
+    Utilizador.hasMany(models.Atividades, {
+      foreignKey: 'responsavel',
+      as: 'atividades'
+    });
+    
+    Utilizador.hasMany(models.Inscritos, {
+      foreignKey: 'IdUtilizador',
+      as: 'inscritos'
+    });
+  };
   
   return Utilizador;
 };

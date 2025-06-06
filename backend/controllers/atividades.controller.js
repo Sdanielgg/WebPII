@@ -57,12 +57,11 @@ let getAllAtividades = async (req, res, next) => {
 let getAtividadeById = async (req, res, next) => {
     try {
         let atividade = await Atividade.findByPk(req.params.id, {
-            attributes: { exclude: ['responsavel'] },
             include: [
                 {
                     model: db.Utilizador,
-                    as: 'creator',
-                    attributes: ['id', 'username']
+                    as: 'utilizador',
+                    attributes: ['IdUtilizador', 'nomeUtilizador', 'email']
                 }
             ],
         });

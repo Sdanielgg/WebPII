@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 // use route middleware for /posts requests
 app.use('/atividades', require('./routes/atividades.routes.js'));
 
+app.use('/inscritos', require('./routes/inscritos.routes.js'));
 // // use route middleware for /tags requests
 // app.use('/reunioes', require('./routes/reunioes.routes.js'));
 
