@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    titulo:{
+    titulo: {
       type: DataTypes.STRING(100),
       allowNull: false
     },
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
-    descrição: {
+    descricao: { // corrige para o mesmo nome da BD
       type: DataTypes.TEXT,
       allowNull: false
     },
@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Utilizadors',
-        key: 'ID_Utilizador'
+        model: 'Utilizadores',  //Validar se é utiliadores ou utiliador!!!!!!!!!
+        key: 'IdUtilizador'
       }
     },
     inscritos: {
@@ -44,5 +44,11 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
 
+  Atividades.associate = (models) => {
+    Atividades.belongsTo(models.Utilizador, {
+      foreignKey: 'responsavel',
+      as: 'creator'
+    });
+  };
   return Atividades;
 };

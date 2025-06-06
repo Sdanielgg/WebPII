@@ -26,10 +26,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
+
   }, {
     timestamps: false,
     tableName: "Inscritos"
   });
+    Medalhas.associate = (models) => {
+      Medalhas.belongsTo(models.Utilizador, {
+        foreignKey: "IdUtilizador",
+        as: "utilizador"
+      });
 
+      Medalhas.belongsTo(models.Atividades, {
+        foreignKey: "IdAtividade",
+        as: "atividade"
+      });
+    }
   return Medalhas;
 };

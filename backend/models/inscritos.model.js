@@ -1,27 +1,30 @@
 module.exports = (sequelize, DataTypes) => {
-  const Inscritos = sequelize.define("Inscritos", {
-    IdUtilizador: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "Utilizador",
-        key: "IdUtilizador"
-      },
-      onDelete: "CASCADE"
+const Inscritos = sequelize.define("Inscritos", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  IdUtilizador: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: "Utilizadores", 
+      key: "IdUtilizador"
     },
-    IdAtividade: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "Atividades",
-        key: "IdAtividade"
-      },
-      onDelete: "CASCADE"
+    onDelete: "CASCADE"
+  },
+  IdAtividade: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: "Atividades", 
+      key: "IdAtividade"
     },
-  }, {
-    timestamps: false,
-    tableName: "Inscritos"
-  });
-
-  return Inscritos;
-};
+    onDelete: "CASCADE"
+  }
+}, {
+  timestamps: false,
+  tableName: "Inscritos"
+});
+}
