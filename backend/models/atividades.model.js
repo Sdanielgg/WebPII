@@ -29,16 +29,6 @@ module.exports = (sequelize, DataTypes) => {
         key: 'IdUtilizador'
       }
     },
-    inscritos: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      defaultValue: 0,
-      validate: {
-        min: {
-          args: [0],
-          msg: "Inscritos deve ser um número positivo."
-        }
-      }
-    }
   }, {
     tableName: 'Atividades',
     timestamps: false

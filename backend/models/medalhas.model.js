@@ -1,23 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
   const Medalhas = sequelize.define("Medalhas", {
-    IdUtilizador: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "Utilizador",
-        key: "IdUtilizador"
-      },
-      onDelete: "CASCADE"
+  IdUtilizador: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: "Utilizadores", 
+      key: "IdUtilizador"
     },
-    IdAtividade: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "Atividades",
-        key: "IdAtividade"
-      },
-      onDelete: "CASCADE"
-    },
+    onDelete: "CASCADE"
+  },
     nomeMedalha:{
       type: DataTypes.STRING(100),
       allowNull: false
@@ -29,17 +20,12 @@ module.exports = (sequelize, DataTypes) => {
 
   }, {
     timestamps: false,
-    tableName: "Inscritos"
+    tableName: "Medalhas"
   });
     Medalhas.associate = (models) => {
       Medalhas.belongsTo(models.Utilizador, {
         foreignKey: "IdUtilizador",
         as: "utilizador"
-      });
-
-      Medalhas.belongsTo(models.Atividades, {
-        foreignKey: "IdAtividade",
-        as: "atividade"
       });
     }
   return Medalhas;

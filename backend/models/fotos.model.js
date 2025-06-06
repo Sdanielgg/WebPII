@@ -1,9 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
    const Fotos = sequelize.define("Fotos", {
-       Id: {
+       IdFoto: {
            primaryKey: true,
            type: DataTypes.STRING,
        },
+         IdAtividade: {
+              type: DataTypes.INTEGER,
+              allowNull: false,
+              references: {
+                model: 'Atividades', 
+                key: 'IdAtividade'
+              },
+              onDelete: 'CASCADE'
+         },
        title: {
            type: DataTypes.STRING,
            allowNull: false,
@@ -29,7 +38,16 @@ module.exports = (sequelize, DataTypes) => {
        },
    }, {
        timestamps: false,
-       tableName: 'Fotos', // Specify the table name explicitly
+       tableName: 'Fotos', 
    });
+   Fotos.associate = (models) => {
+       Fotos.belongsTo(models.Atividades, {
+              foreignKey: 'IdAtividade',
+              as: 'atividade'
+
+            });
+};
+            
+   
    return Fotos;
 };
