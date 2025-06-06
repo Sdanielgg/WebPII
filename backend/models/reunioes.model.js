@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
 
    }, {
        timestamps: false,
-       tableName: 'Reuniao', // Specify the table name explicitly
+       tableName: 'Reuniões', // Specify the table name explicitly
    });
    Reuniao.associate = (models) => {
        Reuniao.belongsTo(models.Utilizador, {

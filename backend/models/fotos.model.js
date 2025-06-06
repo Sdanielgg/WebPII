@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
    Fotos.associate = (models) => {
        Fotos.belongsTo(models.Atividades, {
               foreignKey: 'IdAtividade',
-              as: 'atividade'
+              as: 'atividades'
             });
 };
             

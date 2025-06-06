@@ -19,7 +19,7 @@ const Atividades = require('./atividades.model')(sequelize, DataTypes);
 const Fotos = require('./fotos.model')(sequelize, DataTypes);
 const Inscritos = require('./inscritos.model')(sequelize, DataTypes);
 const Medalhas = require('./medalhas.model')(sequelize, DataTypes);
-const Reuniao = require('./reuniao.model')(sequelize, DataTypes);
+const Reuniao = require('./reunioes.model')(sequelize, DataTypes);
 
 // CRIAR OBJETO DB
   // Collect models
