@@ -2,7 +2,8 @@ module.exports = (sequelize, DataTypes) => {
    const Fotos = sequelize.define("Fotos", {
        IdFoto: {
            primaryKey: true,
-           type: DataTypes.STRING,
+           type: DataTypes.INTEGER,
+           autoIncrement: true,
        },
          IdAtividade: {
               type: DataTypes.INTEGER,
@@ -17,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
            type: DataTypes.STRING,
            allowNull: false,
            validate: {
-               len: { args: [5, 50], msg: "Title must have between 5 to 50 characters." }
+               len: { args: [5, 100], msg: "Title must have between 5 to 50 characters." }
            }
        },
        data: {
@@ -44,7 +45,6 @@ module.exports = (sequelize, DataTypes) => {
        Fotos.belongsTo(models.Atividades, {
               foreignKey: 'IdAtividade',
               as: 'atividade'
-
             });
 };
             

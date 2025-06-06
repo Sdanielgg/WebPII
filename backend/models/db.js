@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-  require('dotenv').config();
-=======
 require('dotenv').config();
->>>>>>> Stashed changes
   const { Sequelize, DataTypes } = require('sequelize');
 
   // Connect using env vars
@@ -17,37 +13,6 @@ require('dotenv').config();
     }
   );
 
-<<<<<<< Updated upstream
-  // Import models
-  const Utilizador = require('./utilizador.model')(sequelize, DataTypes);
-  const Atividades = require('./atividades.model')(sequelize, DataTypes);
-  const Fotos = require('./fotos.model')(sequelize, DataTypes);
-  const Inscritos = require('./inscritos.model')(sequelize, DataTypes);
-  const Medalhas = require('./medalhas.model')(sequelize, DataTypes);
-  const Reuniao = require('./reuniao.model')(sequelize, DataTypes);
-
-  // Collect models
-  const db = {
-    sequelize,
-    Sequelize,
-    Utilizador,
-    Atividades,
-    Fotos,
-    Inscritos,
-    Medalhas,
-    Reuniao,
-  };
-  // Sync DB
-sequelize.sync({ force: true })
-  .then(() => {
-    console.log('✅ Tabelas recriadas com sucesso.');
-  })
-  .catch(err => {
-    console.error('❌ Erro ao criar as tabelas:', err);
-  });
-
-  module.exports = db;
-=======
 // IMPORTAÇÃO DOS MODELS
 const Utilizador = require('./utilizador.model')(sequelize, DataTypes);
 const Atividades = require('./atividades.model')(sequelize, DataTypes);
@@ -95,5 +60,3 @@ sequelize.sync({ force: true })
 
 
 module.exports = db;
-
->>>>>>> Stashed changes

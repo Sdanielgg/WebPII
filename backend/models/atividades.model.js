@@ -39,6 +39,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'responsavel',
       as: 'creator'
     });
+    Atividades.hasMany(models.Fotos, {
+  foreignKey: 'IdAtividade',
+  as: 'fotos'
+});
+
   };
   return Atividades;
 };
