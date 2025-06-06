@@ -1,19 +1,20 @@
-// routes for /atividades requests
 const express = require('express');
 const router = express.Router();
+const controller = require('../controllers/atividades.controller');
 
-// include controller functions
-const atividadesController = require('../controllers/atividades.controller.js');
+// GET todas com filtros/paginação
+router.get('/', controller.getAllAtividades);
 
-router.get('/', atividadesController.getAllAtividades);
-router.get('/:id', atividadesController.getAtividadeById);
+// GET por ID (com User e Tags)
+router.get('/:id', controller.getAtividadeById);
 
-router.post('/', atividadesController.addAtividade);
-router.put('/:id', atividadesController.updateAtividade);
-router.delete('/:id', atividadesController.deleteAtividade);
+// POST nova
+router.post('/', controller.addAtividade);
 
-// NEW ROUTES FOR TAGS IN atividades
-router.post('/:id/reunioes/:reuniao', atividadesController.addTagToAtividade); // add a tag to an atividade
-router.delete('/:id/reunioes/:reuniao', atividadesController.deleteTagFromAtividade); // delete a tag from an atividade
+// PUT atualizar
+router.put('/:id', controller.updateAtividade);
+
+// DELETE apagar
+router.delete('/:id', controller.deleteAtividade);
 
 module.exports = router;
