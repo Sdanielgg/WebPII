@@ -1,4 +1,4 @@
-  require('dotenv').config();
+require('dotenv').config();
   const { Sequelize, DataTypes } = require('sequelize');
 
   // Connect using env vars
@@ -13,14 +13,15 @@
     }
   );
 
-  // Import models
-  const Utilizador = require('./utilizador.model')(sequelize, DataTypes);
-  const Atividades = require('./atividades.model')(sequelize, DataTypes);
-  const Fotos = require('./fotos.model')(sequelize, DataTypes);
-  const Inscritos = require('./inscritos.model')(sequelize, DataTypes);
-  const Medalhas = require('./medalhas.model')(sequelize, DataTypes);
-  const Reuniao = require('./reuniao.model')(sequelize, DataTypes);
+// IMPORTAÇÃO DOS MODELS
+const Utilizador = require('./utilizador.model')(sequelize, DataTypes);
+const Atividades = require('./atividades.model')(sequelize, DataTypes);
+const Fotos = require('./fotos.model')(sequelize, DataTypes);
+const Inscritos = require('./inscritos.model')(sequelize, DataTypes);
+const Medalhas = require('./medalhas.model')(sequelize, DataTypes);
+const Reuniao = require('./reuniao.model')(sequelize, DataTypes);
 
+// CRIAR OBJETO DB
   // Collect models
   const db = {
     sequelize,
@@ -32,7 +33,13 @@
     Medalhas,
     Reuniao,
   };
-  // Sync DB
+
+Object.entries(db).forEach(([key, model]) => {
+  if (typeof model === 'object' && model !== null && model.associate instanceof Function) {
+    model.associate(db);
+  }
+});
+
 sequelize.sync({ force: true })
   .then(() => {
     console.log('✅ Tabelas recriadas com sucesso.');
@@ -41,4 +48,15 @@ sequelize.sync({ force: true })
     console.error('❌ Erro ao criar as tabelas:', err);
   });
 
-  module.exports = db;
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+})();
+
+
+
+module.exports = db;
