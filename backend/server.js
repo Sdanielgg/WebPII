@@ -24,17 +24,17 @@ app.use((req, res, next) => {
 })
 
 app.use('/auth', require('./routes/auth.routes.js'));
-app.use('/users', require('./routes/users.routes.js'));
+app.use('/utilizador', require('./routes/utilizador.routes.js'));
 
 
 // use route middleware for /posts requests
-app.use('/posts', require('./routes/atividades.routes.js'));
+app.use('/atividades', require('./routes/atividades.routes.js'));
 
 // use route middleware for /tags requests
-app.use('/tags', require('./routes/reunioes.routes.js'));
+app.use('/reunioes', require('./routes/reunioes.routes.js'));
 
-// use route middleware for /users requests
-app.use('/users', require('./routes/users.routes.js'));
+// use route middleware for /utilizador requests
+app.use('/utilizador', require('./routes/utilizador.routes.js'));
 
 //handle invalid routes (404)    
 app.use((req, res, next) => {
@@ -64,7 +64,7 @@ app.use((err, req, res, next) => {
         });
     }
     
-    // SequelizeDatabaseError related to an invalid ENUM value (USERS table -> role field)
+    // SequelizeDatabaseError related to an invalid ENUM value (utilizador table -> role field)
     if (err.name === 'SequelizeDatabaseError') {
         if (err.original.code === 'ER_CHECK_CONSTRAINT_VIOLATED') {
             return res.status(400).json({

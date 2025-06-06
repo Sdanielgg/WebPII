@@ -1,5 +1,5 @@
 const db = require('../models/db.js'); // Import the database connection
-const Reuniao = db.Reunioes; // Import the Reuniao model
+const Reuniao = db.Reuniao; // Import the Reuniao model
 
 const { ErrorHandler } = require("../utils/error.js"); // Import the ErrorHandler class
 
