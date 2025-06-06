@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'responsavel',
       as: 'atividades'
     });
-    
+
     Utilizador.hasMany(models.Inscritos, {
       foreignKey: 'IdUtilizador',
       as: 'inscritos'

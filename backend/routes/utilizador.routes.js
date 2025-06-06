@@ -8,5 +8,5 @@ router.get('/privado', authenticate, (req, res) => {
     message: `Bem-vindo, ${req.user.email}. Estás autenticado como ${req.user.role}`
   });
 });
-
+// router.get("/",)
 module.exports = router;

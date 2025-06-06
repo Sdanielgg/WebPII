@@ -11,6 +11,7 @@ let getInscritosByAtividadeId = async (req, res, next) => {
       include: [
         {
           model: db.Utilizador, 
+          as: 'utilizador',
           attributes: ['IdUtilizador', 'nomeUtilizador', 'email']
         }
       ]
@@ -24,7 +25,22 @@ let getInscritosByAtividadeId = async (req, res, next) => {
 
 const getAllInscritos = async (req, res) => {
   try {
-    const inscritos = await Inscritos.findAll();
+    const inscritos = await Inscritos.findAll(
+      {
+        include: [
+          {
+            model: db.Utilizador,
+            as: 'utilizador', 
+            attributes: ['IdUtilizador', 'nomeUtilizador', 'email']
+          },
+          {
+            model: db.Atividades, 
+            as: 'atividades',
+            attributes: ['titulo']
+          }
+        ]
+      }
+    );
     res.status(200).json(inscritos);
   } catch (error) {
     console.error('Erro ao buscar inscritos:', error);

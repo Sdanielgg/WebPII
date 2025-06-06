@@ -27,5 +27,15 @@ const Inscritos = sequelize.define("Inscritos", {
   timestamps: false,
   tableName: "Inscritos"
 });
+Inscritos.associate = (models) => {
+  Inscritos.belongsTo(models.Utilizador, {
+    foreignKey: "IdUtilizador",
+    as: "utilizador"})
+  Inscritos.belongsTo(models.Atividades, {
+    foreignKey: "IdAtividade",
+    as: "atividades"
+  });
+}
+
 return Inscritos;
 };
