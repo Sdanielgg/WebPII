@@ -1,9 +1,6 @@
 const db = require('../models/db.js'); // Import the database connection
 const Atividade = db.Atividades;  // Import the Atividade model
 
-// console.log("DEBUG >>> Atividade type:", typeof Atividade);
-// console.log("DEBUG >>> Atividade keys:", Atividade && Object.keys(Atividade));
-
 const { Op } = require('sequelize');
 const { ErrorHandler } = require("../utils/error.js");
 

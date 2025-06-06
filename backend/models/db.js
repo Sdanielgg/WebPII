@@ -40,7 +40,7 @@ Object.entries(db).forEach(([key, model]) => {
   }
 });
 
-sequelize.sync({ force: true })
+sequelize.sync({ alter: true })
   .then(() => {
     console.log('✅ Tabelas recriadas com sucesso.');
   })
