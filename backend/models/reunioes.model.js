@@ -1,11 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
    const Reuniao = sequelize.define("Reuniao", {
-       titulo: {
-            primaryKey: true,   
+    IdReuniao: {
+           primaryKey: true,
+           autoincrement: true,
+           type: DataTypes.INTEGER,
+           allowNull: false
+         },        
+    titulo: {
            type: DataTypes.STRING,
            allowNull: false,
            validate: {
-               len: { args: [5, 50], msg: "Title must have between 5 to 50 characters." }
+               len: { args: [5, 100], msg: "Title must have between 5 to 50 characters." }
            }
        },
        data: {
@@ -51,8 +56,8 @@ module.exports = (sequelize, DataTypes) => {
    });
    Reuniao.associate = (models) => {
        Reuniao.belongsTo(models.Utilizador, {
-           foreignKey: 'responsavel',
-           as: 'creator'
+           foreignKey: 'Criador',
+           as: 'utilizador'
        });
    };
    return Reuniao;

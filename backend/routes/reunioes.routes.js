@@ -7,5 +7,7 @@ const reunioesController = require('../controllers/reunioes.controller.js');
 
 router.get('/', reunioesController.getAllReunioes);
 router.post('/', reunioesController.addReuniao);
-
+router.get('/:id', reunioesController.getReuniaoById);
+router.delete('/:id', reunioesController.removeReuniao);
+router.put('/:id', reunioesController.updateReuniao);
 module.exports = router;

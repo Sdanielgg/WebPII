@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
-    descricao: { // corrige para o mesmo nome da BD
+    descricao: { 
       type: DataTypes.TEXT,
       allowNull: false
     },

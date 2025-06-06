@@ -1,4 +1,5 @@
 const db = require('../models/db.js'); // Import the database connection
+const { get } = require('../routes/utilizador.routes.js');
 const Reuniao = db.Reuniao; // Import the Reuniao model
 
 const { ErrorHandler } = require("../utils/error.js"); // Import the ErrorHandler class
@@ -9,9 +10,6 @@ let getAllReunioes = async (req, res, next) => {
         let reunioes = await Reuniao.findAll();
         return res.status(200).json({
             data: reunioes,
-            links: [
-                { rel: "add-reuniao", href: `/reunioes`, method: "POST" },
-            ]
         });
     }
     catch (err) {
@@ -22,8 +20,6 @@ let getAllReunioes = async (req, res, next) => {
 // Add a new reuniao
 let addReuniao = async (req, res, next) => {
     try {
-        // You may want to add validation here for required fields in req.body
-
         const reuniao = await Reuniao.create(req.body);
         res.status(201).json({
             msg: "Reuniao successfully created.",
@@ -39,7 +35,58 @@ let addReuniao = async (req, res, next) => {
     }
 }
 
+let removeReuniao = async (req, res, next) => {
+    try {
+        const reuniao = await Reuniao.findByPk(req.params.id);
+        if (!reuniao) {
+            throw new ErrorHandler(404, `Cannot find any REUNIAO with ID ${req.params.id}.`);
+        }
+
+        await reuniao.destroy();
+        res.status(204).send({
+            msg:`Reuniao with ID${reuniao.id} successfully deleted.`,
+        }); 
+    } catch (err) {
+        next(err);
+    }
+}
+let getReuniaoById = async (req, res, next) => {
+    try {
+        let reuniao = await Reuniao.findByPk(req.params.id);
+        if (!reuniao) {
+            throw new ErrorHandler(404, `Cannot find any REUNIAO with ID ${req.params.id}.`);
+        } else {
+            reuniao = reuniao.toJSON();
+            res.status(200).json(reuniao);
+        }
+    }
+    catch (err) {
+        next(err);
+    }
+}
+let updateReuniao = async (req, res, next) => {
+    try {
+        const reuniao = await Reuniao.findByPk(req.params.id);
+        if (!reuniao) {
+            throw new ErrorHandler(404, `Cannot find any REUNIAO with ID ${req.params.id}.`);
+        }
+
+        await reuniao.update(req.body);
+        res.status(200).json({
+            msg: "Reuniao successfully updated.",
+            reuniaoId: reuniao.id,
+            reuniao: reuniao,
+
+        });
+    } catch (err) {
+        next(err);
+    } }
+
+
 module.exports = {
     getAllReunioes,
     addReuniao,
+    removeReuniao,
+    getReuniaoById,
+    updateReuniao
 }
