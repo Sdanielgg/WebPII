@@ -11,7 +11,7 @@ const host = process.env.HOST;
 
 
 app.use(express.json());
-const db = require('./models/db.js');
+// const db = require('./models/db.js');
 
 // middleware for ALL routes
 app.use((req, res, next) => {
@@ -23,18 +23,18 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use('/auth', require('./routes/auth.routes.js'));
-app.use('/utilizador', require('./routes/utilizador.routes.js'));
+// app.use('/auth', require('./routes/auth.routes.js'));
+// app.use('/utilizador', require('./routes/utilizador.routes.js'));
 
 
 // use route middleware for /posts requests
 app.use('/atividades', require('./routes/atividades.routes.js'));
 
-// use route middleware for /tags requests
-app.use('/reunioes', require('./routes/reunioes.routes.js'));
+// // use route middleware for /tags requests
+// app.use('/reunioes', require('./routes/reunioes.routes.js'));
 
-// use route middleware for /utilizador requests
-app.use('/utilizador', require('./routes/utilizador.routes.js'));
+// // use route middleware for /utilizador requests
+// app.use('/utilizador', require('./routes/utilizador.routes.js'));
 
 //handle invalid routes (404)    
 app.use((req, res, next) => {
@@ -93,4 +93,4 @@ app.listen(port, host, () => {
     console.log(`App listening at http://${host}:${port}/`);
 });
 
-console.log("DB_DIALECT:", process.env.DB_DIALECT);
+// console.log("DB_DIALECT:", process.env.DB_DIALECT);
