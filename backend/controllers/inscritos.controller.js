@@ -10,7 +10,7 @@ let getInscritosByAtividadeId = async (req, res, next) => {
       where: { IdAtividade: req.params.id },
       include: [
         {
-          model: db.Utilizador, 
+          model: db.Utilizador,
           as: 'utilizador',
           attributes: ['IdUtilizador', 'nomeUtilizador', 'email']
         }
@@ -30,11 +30,11 @@ const getAllInscritos = async (req, res) => {
         include: [
           {
             model: db.Utilizador,
-            as: 'utilizador', 
+            as: 'utilizador',
             attributes: ['IdUtilizador', 'nomeUtilizador', 'email']
           },
           {
-            model: db.Atividades, 
+            model: db.Atividades,
             as: 'atividades',
             attributes: ['titulo']
           }
@@ -99,8 +99,8 @@ const removeInscrito = async (req, res) => {
 };
 
 module.exports = {
-    getInscritosByAtividadeId,
-    getAllInscritos,
-    addInscrito,
-    removeInscrito
+  getInscritosByAtividadeId,
+  getAllInscritos,
+  addInscrito,
+  removeInscrito
 }
