@@ -1,17 +1,17 @@
 require('dotenv').config();
-  const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
-  // Connect using env vars
-  const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-      host: process.env.DB_HOST,
-      dialect: process.env.DB_DIALECT,
-      logging: false,
-    }
-  );
+// Connect using env vars
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+    logging: false,
+  }
+);
 
 // IMPORTAÇÃO DOS MODELS
 const Utilizador = require('./utilizador.model')(sequelize, DataTypes);
@@ -22,19 +22,19 @@ const Medalhas = require('./medalhas.model')(sequelize, DataTypes);
 const Reuniao = require('./reunioes.model')(sequelize, DataTypes);
 
 // CRIAR OBJETO DB
-  // Collect models
-  const db = {
-    sequelize,
-    Sequelize,
-    Utilizador,
-    Atividades,
-    Fotos,
-    Inscritos,
-    Medalhas,
-    Reuniao,
-  };
+// Collect models
+const db = {
+  sequelize,
+  Sequelize,
+  Utilizador,
+  Atividades,
+  Fotos,
+  Inscritos,
+  Medalhas,
+  Reuniao,
+};
 
-  
+
 Object.values(db).forEach(model => {
   if (model.associate) {
     model.associate(db);

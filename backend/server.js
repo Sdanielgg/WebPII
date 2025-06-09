@@ -32,8 +32,9 @@ app.use('/utilizador', require('./routes/utilizador.routes.js'));
 app.use('/atividades', require('./routes/atividades.routes.js'));
 app.use('/inscritos', require('./routes/inscritos.routes.js'));
 app.use('/reunioes', require('./routes/reunioes.routes.js'));
-// // use route middleware for /tags requests
-// app.use('/reunioes', require('./routes/reunioes.routes.js'));
+app.use('/fotos', require('./routes/fotos.routes.js'));
+// app.use('/medalhas', require('./routes/medalhas.routes.js'));
+
 
 // // use route middleware for /utilizador requests
 // app.use('/utilizador', require('./routes/utilizador.routes.js'));
@@ -48,13 +49,11 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     // !Uncomment this line to log the error details to the server console!
     console.error(err);
-    
-    
-    
+
     // error thrown by express.json() middleware when the request body is not valid JSON
     if (err.type === 'entity.parse.failed')
         return res.status(400).json({ error: 'Invalid JSON payload! Check if your body data is a valid JSON.' });
-    
+
     // Sequelize validation errors (ALL models)
     if (err.name === 'SequelizeValidationError' || err.name === 'SequelizeUniqueConstraintError') {
         return res.status(400).json({
@@ -65,7 +64,7 @@ app.use((err, req, res, next) => {
             }))
         });
     }
-    
+
     // SequelizeDatabaseError related to an invalid ENUM value (utilizador table -> role field)
     if (err.name === 'SequelizeDatabaseError') {
         if (err.original.code === 'ER_CHECK_CONSTRAINT_VIOLATED') {

@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false,
       validate: { isEmail: true },
     },
@@ -23,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM('administrador', 'membros do concelho', 'coordenador', 'secretariado', 'utilizador'),
       defaultValue: 'Utilizador',
     },
-    
-  },{
+
+  }, {
     timestamps: false,
     tableName: 'Utilizadores', // Specify the table name explicitly
-  }); 
+  });
   Utilizador.associate = (models) => {
 
 
@@ -49,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       as: 'reunioes'
     });
   };
-  
+
   return Utilizador;
 };
 // This code defines a Sequelize model for a "Utilizador" (User) entity in a database.

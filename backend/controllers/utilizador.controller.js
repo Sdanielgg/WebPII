@@ -33,22 +33,22 @@ let getUserById = async (req, res, next) => {
 
 // GET utilizadores por cargo
 const getUsersByCargo = async (req, res) => {
-  const { cargo } = req.params;
+    const { cargo } = req.params;
 
-  try {
-    const cargosValidos = ['administrador', 'membros do concelho', 'coordenador', 'secretariado', 'utilizador'];
-    if (!cargosValidos.includes(cargo)) {
-      return res.status(400).json({ error: 'Cargo inválido' });
+    try {
+        const cargosValidos = ['administrador', 'membros do concelho', 'coordenador', 'secretariado', 'utilizador'];
+        if (!cargosValidos.includes(cargo)) {
+            return res.status(400).json({ error: 'Cargo inválido' });
+        }
+
+        const utilizadores = await User.findAll({
+            where: { cargo },
+        });
+
+        res.status(200).json(utilizadores);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao buscar utilizadores por cargo', details: error.message });
     }
-
-    const utilizadores = await User.findAll({
-      where: { cargo },
-    });
-
-    res.status(200).json(utilizadores);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao buscar utilizadores por cargo', details: error.message });
-  }
 };
 
 
@@ -86,7 +86,8 @@ let updateUser = async (req, res, next) => {
         });
     } catch (err) {
         next(err);
-    } }
+    }
+}
 
 
 let removeUser = async (req, res, next) => {
@@ -98,8 +99,8 @@ let removeUser = async (req, res, next) => {
 
         await user.destroy();
         res.status(204).send({
-            msg:`User with ID${user.id} successfully deleted.`,
-        }); 
+            msg: `User with ID${user.id} successfully deleted.`,
+        });
     } catch (err) {
         next(err);
     }
