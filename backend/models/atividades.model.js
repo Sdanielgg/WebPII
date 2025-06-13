@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
-    descricao: { 
+    descricao: {
       type: DataTypes.TEXT,
       allowNull: false
     },
@@ -25,29 +25,29 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-          model: 'Utilizadores', 
-          key: 'IdUtilizador'
-        }
-      },
-    }, {
-      tableName: 'Atividades',
-      timestamps: false
+        model: 'Utilizadores',
+        key: 'IdUtilizador'
+      }
+    },
+  }, {
+    tableName: 'Atividades',
+    timestamps: false
+  });
+
+  Atividades.associate = (models) => {
+    Atividades.hasMany(models.Fotos, {
+      foreignKey: 'IdAtividade',
+      as: 'fotos'
+    });
+    Atividades.hasMany(models.Inscritos, {
+      foreignKey: 'IdAtividade',
+      as: 'inscritos'
+    });
+    Atividades.belongsTo(models.Utilizador, {
+      foreignKey: 'responsavel',
+      as: 'utilizador'
     });
 
-    Atividades.associate = (models) => {
-      Atividades.hasMany(models.Fotos, {
-    foreignKey: 'IdAtividade',
-    as: 'fotos'
-  });
-      Atividades.hasMany(models.Inscritos, {
-        foreignKey: 'IdAtividade',
-        as: 'inscritos'
-      });
-      Atividades.belongsTo(models.Utilizador, {
-        foreignKey: 'responsavel',
-        as: 'utilizador'
-      });
-
-    };
-    return Atividades;
   };
+  return Atividades;
+};
