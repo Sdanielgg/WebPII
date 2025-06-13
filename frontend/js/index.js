@@ -23,118 +23,192 @@ document.addEventListener("DOMContentLoaded", function () {
     observer.observe(section);
   });
 
-// ... (seu código JavaScript existente, incluindo o do botão de scroll e menu lateral) ...
 
-// --- Carrossel de Imagem Única (5 imagens) ---
-const singleSlides = document.querySelectorAll('.full-width-carousel .carousel-slide-single');
-const singleCarouselContainer = document.querySelector('.full-width-carousel .carousel-container');
-const singleDotsContainer = document.querySelector('.carousel-dots-single');
-let singleCurrentIndex = 0;
-let singleInterval;
 
-// Cria os pontos de navegação
-singleSlides.forEach((_, index) => {
+
+  // --- Carrossel de Imagem Única (5 imagens) ---
+  const singleSlides = document.querySelectorAll('.full-width-carousel .carousel-slide-single');
+  const singleCarouselContainer = document.querySelector('.full-width-carousel .carousel-container');
+  const singleDotsContainer = document.querySelector('.carousel-dots-single');
+  let singleCurrentIndex = 0;
+  let singleInterval;
+
+  // Cria os pontos de navegação
+  singleSlides.forEach((_, index) => {
     const dot = document.createElement('span');
     dot.classList.add('dot-single');
     if (index === 0) dot.classList.add('active');
     dot.addEventListener('click', () => {
-        clearInterval(singleInterval); // Limpa o intervalo automático ao clicar no ponto
-        singleCurrentIndex = index;
-        updateSingleCarousel();
-        startSingleCarousel(); // Reinicia o intervalo
+      clearInterval(singleInterval); // Limpa o intervalo automático ao clicar no ponto
+      singleCurrentIndex = index;
+      updateSingleCarousel();
+      startSingleCarousel(); // Reinicia o intervalo
     });
     singleDotsContainer.appendChild(dot);
-});
+  });
 
-const singleDots = document.querySelectorAll('.dot-single');
+  const singleDots = document.querySelectorAll('.dot-single');
 
-const updateSingleCarousel = () => {
+  const updateSingleCarousel = () => {
     singleCarouselContainer.style.transform = `translateX(-${singleCurrentIndex * 100}%)`;
     singleDots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === singleCurrentIndex);
+      dot.classList.toggle('active', idx === singleCurrentIndex);
     });
-};
+  };
 
-const nextSingleSlide = () => {
+  const nextSingleSlide = () => {
     singleCurrentIndex = (singleCurrentIndex + 1) % singleSlides.length;
     updateSingleCarousel();
-};
+  };
 
-const startSingleCarousel = () => {
+  const startSingleCarousel = () => {
     clearInterval(singleInterval); // Garante que não há múltiplos intervalos
     singleInterval = setInterval(nextSingleSlide, 5000); // Muda a cada 5 segundos
-};
+  };
 
-// Inicia o carrossel automático
-startSingleCarousel();
+  // Inicia o carrossel automático
+  startSingleCarousel();
 
-// Garante que o carrossel se ajusta ao redimensionar
-window.addEventListener('resize', () => {
+  // Garante que o carrossel se ajusta ao redimensionar
+  window.addEventListener('resize', () => {
     updateSingleCarousel();
-});
+  });
 
 
-// ... (seu código JavaScript existente, incluindo o do botão de scroll, menu lateral e o primeiro carrossel) ...
 
-// --- Carrossel de Múltiplas Imagens (8 imagens) ---
-const multiCarouselTrack = document.querySelector('.multi-image-carousel .carousel-track');
-const multiSlides = Array.from(multiCarouselTrack.children);
-const multiNextButton = document.querySelector('.multi-image-carousel .next-btn');
-const multiPrevButton = document.querySelector('.multi-image-carousel .prev-btn');
+  // --- Carrossel de Múltiplas Imagens (8 imagens) ---
+  const multiCarouselTrack = document.querySelector('.multi-image-carousel .carousel-track');
+  const multiSlides = Array.from(multiCarouselTrack.children);
+  const multiNextButton = document.querySelector('.multi-image-carousel .next-btn');
+  const multiPrevButton = document.querySelector('.multi-image-carousel .prev-btn');
 
-let multiCurrentSlideIndex = 0; // Índice do primeiro slide visível
+  let multiCurrentSlideIndex = 0; // Índice do primeiro slide visível
 
-// Função para calcular quantos slides visíveis teremos
-const getMultiSlidesPerPage = () => {
-  if (window.innerWidth <= 480) return 1;
-  if (window.innerWidth <= 768) return 2;
-  return 3;
-};
+  // Função para calcular quantos slides visíveis teremos
+  const getMultiSlidesPerPage = () => {
+    if (window.innerWidth <= 480) return 1;
+    if (window.innerWidth <= 768) return 2;
+    return 3;
+  };
 
-const updateMultiCarouselPosition = () => {
-  // Pega a largura do primeiro slide, incluindo padding/margin do CSS
-  const slideWidth = multiSlides[0].getBoundingClientRect().width +
-                     (parseFloat(getComputedStyle(multiSlides[0]).paddingLeft) * 2); // Exemplo de como pegar o padding
-  
-  multiCarouselTrack.style.transform = 'translateX(' + (-slideWidth * multiCurrentSlideIndex) + 'px)';
-};
+  const updateMultiCarouselPosition = () => {
+    // Pega a largura do primeiro slide, incluindo padding/margin do CSS
+    const slideWidth = multiSlides[0].getBoundingClientRect().width +
+      (parseFloat(getComputedStyle(multiSlides[0]).paddingLeft) * 2); // Exemplo de como pegar o padding
 
-const moveToMultiNextSlide = () => {
-  const slidesPerPage = getMultiSlidesPerPage();
-  // Se o próximo movimento exceder o final, vá para o último slide possível
-  // (para que o espaço vazio não apareça no final)
-  if (multiCurrentSlideIndex + 1 <= multiSlides.length - slidesPerPage) {
-    multiCurrentSlideIndex++;
-  } else {
-    // Ou, se quiser que ele reinicie ao chegar ao final:
+    multiCarouselTrack.style.transform = 'translateX(' + (-slideWidth * multiCurrentSlideIndex) + 'px)';
+  };
+
+  const moveToMultiNextSlide = () => {
+    const slidesPerPage = getMultiSlidesPerPage();
+    // Se o próximo movimento exceder o final, vá para o último slide possível
+    // (para que o espaço vazio não apareça no final)
+    if (multiCurrentSlideIndex + 1 <= multiSlides.length - slidesPerPage) {
+      multiCurrentSlideIndex++;
+    } else {
+      // Ou, se quiser que ele reinicie ao chegar ao final:
+      multiCurrentSlideIndex = 0;
+    }
+    updateMultiCarouselPosition();
+  };
+
+  const moveToMultiPrevSlide = () => {
+    if (multiCurrentSlideIndex > 0) {
+      multiCurrentSlideIndex--;
+    } else {
+      // Ou, se quiser que ele vá para o final ao chegar ao início:
+      multiCurrentSlideIndex = multiSlides.length - getMultiSlidesPerPage();
+    }
+    updateMultiCarouselPosition();
+  };
+
+  // Event Listeners para os botões do segundo carrossel
+  multiNextButton.addEventListener('click', moveToMultiNextSlide);
+  multiPrevButton.addEventListener('click', moveToMultiPrevSlide);
+
+  // Atualiza a posição do carrossel ao redimensionar a janela
+  window.addEventListener('resize', () => {
+    // Ao redimensionar, redefina o índice para 0 para evitar problemas de layout
     multiCurrentSlideIndex = 0;
-  }
-  updateMultiCarouselPosition();
-};
+    updateMultiCarouselPosition();
+  });
 
-const moveToMultiPrevSlide = () => {
-  if (multiCurrentSlideIndex > 0) {
-    multiCurrentSlideIndex--;
-  } else {
-    // Ou, se quiser que ele vá para o final ao chegar ao início:
-    multiCurrentSlideIndex = multiSlides.length - getMultiSlidesPerPage();
-  }
-  updateMultiCarouselPosition();
-};
 
-// Event Listeners para os botões do segundo carrossel
-multiNextButton.addEventListener('click', moveToMultiNextSlide);
-multiPrevButton.addEventListener('click', moveToMultiPrevSlide);
+  // Contadores animados
+  const counters = document.querySelectorAll('.counter');
+  const speed = 200; // quanto menor, mais rápido
 
-// Atualiza a posição do carrossel ao redimensionar a janela
-window.addEventListener('resize', () => {
-  // Ao redimensionar, redefina o índice para 0 para evitar problemas de layout
-  multiCurrentSlideIndex = 0;
+  counters.forEach(counter => {
+    const animate = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+
+      const increment = target / speed;
+
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(animate, 20);
+      } else {
+        counter.innerText = target;
+      }
+    };
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animate();
+          observer.unobserve(counter);
+        }
+      });
+    }, { threshold: 1 });
+
+    observer.observe(counter);
+  });
+
+
+  // Inicializa a posição do carrossel quando a página carrega
   updateMultiCarouselPosition();
+  AOS.init();
+
+
+
+
 });
 
-// Inicializa a posição do carrossel quando a página carrega
-updateMultiCarouselPosition();
 
-
+document.getElementById('login-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const email = email.value, password = password.value;
+  try {
+    const res = await fetch('http://localhost:3000/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || data.message);
+    localStorage.setItem('token', data.token);
+    window.location.href = 'dashboard.html';
+  } catch (err) {
+    document.getElementById('error').innerText = err.message;
+  }
 });
+
+
+async function fazerLogin(email, password) {
+    const response = await fetch('http://localhost:PORT/auth/login', {
+        method:'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+        console.log('Login realizado!', data);
+        // podes guardar o JWT no localStorage
+        localStorage.setItem('token', data.token);
+    } else {
+        console.error('Erro no login!', data.error);
+    }
+}

@@ -1,18 +1,18 @@
+// backend/middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const SECRET = process.env.JWT_SECRET || 'segredo_super_secreto';
 
-const authenticate = (req, res, next) => {
-  const token = req.header('Authorization')?.split(' ')[1];
-
-  if (!token) return res.status(401).json({ error: 'Token ausente.' });
+module.exports = (req, res, next) => {
+  const header = req.headers['authorization'];
+  if (!header) return res.status(401).json({ error: 'Token não fornecido' });
+  const [type, token] = header.split(' ');
+  if (type !== 'Bearer') return res.status(401).json({ error: 'Formato de token inválido' });
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, SECRET);
     req.user = decoded;
     next();
   } catch (err) {
-    res.status(401).json({ error: 'Token inválido.' });
+    res.status(401).json({ error: 'Token inválido ou expirado' });
   }
 };
-
-module.exports = authenticate;

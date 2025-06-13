@@ -162,97 +162,7 @@ footer {
     }
 }
 
-.login-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4rem 2rem;
-    background-color: var(--cor-creme-claro); /* Usando variável */
-    gap: 2rem;
-    flex-wrap: wrap;
-}
 
-.login-left, .login-center, .login-right {
-    flex: 1;
-    min-width: 250px;
-    color: var(--cor-grafite); /* Usando variável */
-}
-
-.login-left {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.login-left h2 {
-    margin-bottom: 1rem;
-}
-
-.login-left form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-}
-
-.login-left input {
-    padding: 10px;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-    border: 1px solid var(--cor-cinza-ardosia); /* Usando variável */
-    font-family: 'Kalam', cursive;
-    color: var(--cor-grafite); /* Usando variável */
-    background-color: var(--cor-creme-claro); /* Usando variável */
-}
-
-.login-left button {
-    background-color: var(--cor-verde-floresta); /* Usando variável */
-    color: var(--cor-creme-claro); /* Usando variável */
-    padding: 0.7rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Testemunhos (carousel fixo) */
-.login-center .carousel {
-    position: relative;
-    max-width: 100%;
-    min-height: 140px;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    padding: 1rem;
-}
-
-.login-center .slide {
-    display: none;
-    width: 100%;
-    transition: opacity 0.5s ease;
-}
-
-.login-center .slide.active {
-    display: block;
-}
-
-.login-center strong {
-    display: block;
-    margin-top: 0.5rem;
-    color: var(--cor-verde-floresta); /* Usando variável */
-}
-
-/* Lado direito */
-.login-right {
-    text-align: center;
-}
-
-.login-right img {
-    max-width: 100px;
-    opacity: 0.8;
-}
 
 #scrollTopBtn {
     position: fixed;
@@ -432,4 +342,69 @@ footer {
     .carousel-slide {
         min-width: 100%;
     }
+}
+
+#login {
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.login-title {
+  color: #1565c0;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Linha com os dois campos lado a lado */
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.flex-item {
+  flex: 1;
+  min-width: 0;
+}
+
+.login-input {
+  border-radius: 8px;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.form-label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+
+/* Botão */
+.login-button {
+  background-color: #1565c0;
+  color: white;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.login-button:hover {
+  background-color: #0d47a1;
 }

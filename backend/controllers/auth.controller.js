@@ -1,46 +1,64 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/utilizador.model.js');
-require('dotenv').config();
+// backend/controllers/auth.controller.js
+const db = require('../models/db.js'); // ligação à base de dados
+const Utilizador = db.Utilizador;
+const bcrypt = require('bcryptjs'); 
+const jwt = require('jsonwebtoken');  
 
-const registerUser = async (req, res) => {
-  const { nome, email, password, role } = req.body;
+// Registo de um novo usuário
+exports.register = async (req, res, next) => {
+    try {
+        const { nomeUtilizador, email, password, cargo } = req.body;
+        if (!nomeUtilizador || !email || !password) {
+            return res.status(400).json({ error: "Dados incompletos" });
+        }
+        
+        // verifica se o email já existe
+        const existe = await Utilizador.findOne({ where: { email } });
+        if (existe) {
+            return res.status(400).json({ error: "Email já utilizado" });
+        }
+        
+        // faz o hash da password
+        const hashed = await bcrypt.hash(password, 10);
+        
+        // grava o usuário na base de dados
+        const user = await Utilizador.create({ nomeUtilizador, email, password: hashed, cargo });
 
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({
-      nome,
-      email,
-      password: hashedPassword,
-      role,
-    });
+        res.status(201).json({ message: "Utilizador criado com sucesso.", id: user.IdUtilizador });
 
-    res.status(201).json({ message: 'Utilizador criado com sucesso!' });
-  } catch (err) {
-    res.status(500).json({ error: 'Erro ao criar utilizador.' });
-  }
+    } catch (err) {
+        next(err);
+    }
 };
 
-const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+ // Autenticação (login) de um usuário
+exports.login = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
 
-  try {
-    const user = await User.findOne({ where: { email } });
-    if (!user) return res.status(404).json({ error: 'Utilizador não encontrado.' });
+        if (!email || !password) {
+            return res.status(400).json({ error: "Dados incompletos" });
+        }
+        
+        // verifica se o usuário existe
+        const user = await Utilizador.findOne({ where: { email } });
+        if (!user) {
+            return res.status(400).json({ error: "Utilizador não encontrado" });
+        }
+        
+        // verifica se a password corresponde
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
+            return res.status(400).json({ error: "Palavra-passe incorreta" });
+        }
+        
+        // gera um token JWT
+        const token = jwt.sign({ id: user.IdUtilizador }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.status(401).json({ error: 'Senha incorreta.' });
+        res.json({ message: "Login realizado com sucesso.", token });
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '1d' }
-    );
-
-    res.json({ token, user: { id: user.id, nome: user.nome, role: user.role } });
-  } catch (err) {
-    res.status(500).json({ error: 'Erro ao fazer login.' });
-  }
+    } catch (err) {
+        next(err);
+    }
 };
 
-module.exports = { registerUser, loginUser };

@@ -9,6 +9,8 @@ const app = express();
 const port = process.env.PORT;	// use environment variables
 const host = process.env.HOST;
 
+app.use('/auth', require('./routes/auth.routes.js'));
+
 
 app.use(express.json());
 // const db = require('./models/db.js');
