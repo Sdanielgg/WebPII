@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Atividades</title>
+<style>
+  .btn-excluir {
+    margin-left: 10px;
+    display: none; /* inicialmente escondido */
+  }
+  .btn-excluir.mostrar {
+    display: inline-block;
+  }
+</style>
 </head>
 <body>
 <h1>Atividades</h1>
 
+<!-- Botão para alternar modo edição -->
+<button id="btn-editar-atividades">Editar Atividades</button>
+
 <h2>Adicionar nova atividade</h2>
 <form id="add-form">
-  <input name="titulo" placeholder="Título" required /><br>
-  <input name="local" placeholder="Local" required /><br>
-  <input name="data" type="date" required /><br>
-  <textarea name="descricao" placeholder="Descrição" required></textarea><br>
-  <input name="responsavel" placeholder="Id do responsável" required /><br>
+  <input name="titulo" placeholder="Título" required /><br />
+  <input name="local" placeholder="Local" required /><br />
+  <input name="data" type="date" required /><br />
+  <textarea name="descricao" placeholder="Descrição" required></textarea><br />
+  <input name="responsavel" placeholder="Id do responsável" required /><br />
   <button type="submit">Salvar</button>
 </form>
 
@@ -22,6 +34,5 @@
 <ul id="atividades-list"></ul>
 
 <script src="js/atividades.js"></script>
-
 </body>
 </html>
