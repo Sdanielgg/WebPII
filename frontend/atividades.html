@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atividades</title>
+</head>
+<body>
+<h1>Atividades</h1>
+
+<h2>Adicionar nova atividade</h2>
+<form id="add-form">
+  <input name="titulo" placeholder="Título" required /><br>
+  <input name="local" placeholder="Local" required /><br>
+  <input name="data" type="date" required /><br>
+  <textarea name="descricao" placeholder="Descrição" required></textarea><br>
+  <input name="responsavel" placeholder="Id do responsável" required /><br>
+  <button type="submit">Salvar</button>
+</form>
+
+<h2>Lista de atividades</h2>
+<ul id="atividades-list"></ul>
+
+<script src="js/atividades.js"></script>
+
+</body>
+</html>

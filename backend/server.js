@@ -22,6 +22,10 @@ app.use((req, res, next) => {
     next()
 })
 
+const cors = require('cors');
+
+app.use(cors());  // Permite todas as origens (modo permissivo)
+
 
 // use route middleware for /posts requests
 app.use('/utilizador', require('./routes/utilizador.routes.js'));

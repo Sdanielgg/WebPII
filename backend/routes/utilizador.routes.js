@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const authenticate = require('../middleware/authMiddleware');
 
 const utilizadoresController = require('../controllers/utilizador.controller.js');
 
 
 // Rota protegida — só acedes se estiveres autenticado
-router.get('/privado', authenticate, (req, res) => {
+router.get('/privado', (req, res) => {
   res.json({
     message: `Bem-vindo, ${req.user.email}. Estás autenticado como ${req.user.role}`
   });
