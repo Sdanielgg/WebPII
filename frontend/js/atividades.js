@@ -1,96 +1,101 @@
-let mostrarExcluir = false;
+// isto busca o id da atividade 
+const urlParams = new URLSearchParams(window.location.search);
+const atividadeId = urlParams.get('id');
 
-  async function carregarAtividades() {
+// Fetch atividade
+async function fetchAtividadeDetails() {
     try {
-      const res = await fetch("http://localhost:3000/atividades");
-      const json = await res.json();
+        const response = await fetch(`http://127.0.0.1:3000/atividades/${atividadeId}`);
+        const atividade = await response.json();
 
-      const ul = document.getElementById("atividades-list");
-      ul.innerHTML = "";
-      json.data?.forEach((ativ) => {
-        const li = document.createElement("li");
+        console.log('Atividade:', atividade);
+        document.getElementById('AtividadeTitulo').textContent = atividade.titulo;
+        document.getElementById('AtividadeResponsavel').textContent = 'Responsavel: ' + atividade.utilizador.nomeUtilizador;
+        document.getElementById('AtividadeEstado').textContent = 'Estado: ' + atividade.estado;
+        document.getElementById('AtividadeLocal').textContent = 'Local: ' + atividade.local;
+        document.getElementById('AtividadeData').textContent = 'Data: ' + new Date(atividade.data).toLocaleDateString('pt-PT', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+        document.getElementById('Descricao').textContent = atividade.descricao;
 
-        li.innerHTML = `
-          <strong>${ativ.titulo}</strong> - ${ativ.local} - ${new Date(
-          ativ.data
-        ).toLocaleDateString()}
-          <br>${ativ.descricao}
-        `;
-
-        const btnExcluir = document.createElement("button");
-        btnExcluir.textContent = "Excluir";
-        btnExcluir.className = "btn-excluir";
-        if (mostrarExcluir) btnExcluir.classList.add("mostrar");
-
-        btnExcluir.onclick = async () => {
-          if (
-            confirm(`Deseja realmente excluir a atividade "${ativ.titulo}"?`)
-          ) {
-            const resDelete = await fetch(
-              `http://localhost:3000/atividades/${ativ.IdAtividade}`,
-              {
-                method: "DELETE",
-              }
-            );
-
-            if (resDelete.status === 204) {
-              alert("Atividade excluída com sucesso!");
-              carregarAtividades();
-            } else {
-              alert("Erro ao excluir atividade!");
-            }
-          }
-        };
-
-        li.appendChild(btnExcluir);
-        ul.appendChild(li);
-      });
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+        console.error('Erro ao carregar atividade:', error);
     }
-  }
+}
+fetchAtividadeDetails();
 
-  document
-    .getElementById("btn-editar-atividades")
-    .addEventListener("click", () => {
-      mostrarExcluir = !mostrarExcluir;
-      document.querySelectorAll(".btn-excluir").forEach((btn) => {
-        if (mostrarExcluir) {
-          btn.classList.add("mostrar");
-        } else {
-          btn.classList.remove("mostrar");
+async function fetchAtividadeInscritos() {
+    try {
+        const response = await fetch(`http://127.0.1:3000/inscritos/${atividadeId}`);
+        const inscritos = await response.json();
+        console.log('Inscritos:', inscritos);
+        if (document.getElementById('AtividadeEstado').textContent !== "Estado: Por Realizar") {
+            document.getElementById('btnInscrever').disabled = false;
+        }XMLDocument
+        document.getElementById('AtividadeInscritos').textContent = "Inscritos: " + inscritos.length || 0;
+    }
+    catch (error) {
+        console.error('Erro ao carregar inscritos:', error);
+    }
+}
+fetchAtividadeInscritos();
+
+async function EstadoAtividadeCheck() {
+    try {
+        const response = await fetch(`http://127.0.1:3000/atividades/${atividadeId}`);
+        const atividade = await response.json();
+        if (atividade.estado === "Realizada") {
+            document.getElementById('btnInscrever').disabled = true;
+            document.getElementById('btnInscrever').textContent = "Inscrever"; // typo fixed too
+        } else if (atividade.estado === "Por Realizar") {
+            document.getElementById('btnInscrever').disabled = false;
+            document.getElementById('btnInscrever').textContent = "Inscrever";
         }
-      });
-    });
 
-  document.getElementById("add-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const form = e.target;
-    const novaAtividade = {
-      titulo: form.titulo.value,
-      local: form.local.value,
-      data: form.data.value,
-      descricao: form.descricao.value,
-      responsavel: parseInt(form.responsavel.value, 10),
-    };
-    try {
-      const res = await fetch("http://localhost:3000/atividades", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(novaAtividade),
-      });
-
-      if (res.ok) {
-        form.reset();
-        await carregarAtividades();
-      } else {
-        const erro = await res.json();
-        console.error("Erro ao salvar atividade!", erro);
-      }
-    } catch (err) {
-      console.error(err);
     }
-  });
+    catch (error) {
+        console.error('Erro ao verificar estado da atividade:', error);
+    }
+}
+EstadoAtividadeCheck();
 
-  window.onload = carregarAtividades;
+async function carregarFotos() {
+    try {
+        const response = await fetch(`http://127.0.1:3000/fotos/${atividadeId}`);
+        const fotos = await response.json();
+        console.log('Fotos:', fotos);
+        const grid = document.getElementById('fotosGrid');
+        fotos.forEach(foto => {
+            const container = document.createElement('div');
+            container.classList.add('foto-container');
+
+            const img = document.createElement('img');
+            img.src = foto.url;
+            img.alt = 'Foto da Atividade';
+            img.classList.add('fotosGridImg');
+
+            const titulo = document.createElement('p');
+            titulo.textContent = foto.titulo;
+            titulo.classList.add('fotosGridTitulo');
+
+            const data = document.createElement('p');
+
+            data.textContent = new Date(foto.data).toLocaleDateString('pt-PT', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            container.appendChild(img);
+            container.appendChild(titulo);
+            container.appendChild(data);
+            grid.appendChild(container);
+        });
+
+    }
+    catch (error) {
+        console.error('Erro ao carregar fotos:', error);
+    }
+}
+carregarFotos();

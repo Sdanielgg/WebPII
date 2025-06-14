@@ -189,9 +189,9 @@ async function fetchTop3Atividades() {
       .slice(0, 3);
     top3.reverse()
     console.log('Top 3 atividades:', top3);
-    const atividadesContainer=document.getElementById('cards');
+    const atividadesContainer = document.getElementById('cards');
     atividadesContainer.innerHTML = ''
-    top3.forEach(atividade=>{
+    top3.forEach(atividade => {
       const card = document.createElement('div');
       card.classList.add('card');
       atividadesContainer.appendChild(card);
@@ -203,7 +203,7 @@ async function fetchTop3Atividades() {
       const localElement = document.createElement('p');
       card.appendChild(localElement);
       localElement.textContent = local;
-      const data =atividade.data;
+      const data = atividade.data;
       const dataElement = document.createElement('p');
       card.appendChild(dataElement);
       dataElement.textContent = new Date(data).toLocaleDateString('pt-PT', {
@@ -211,18 +211,21 @@ async function fetchTop3Atividades() {
         month: '2-digit',
         day: '2-digit'
       });
-      return top3
+      // vai levar a pagina da atividade correta
+      card.addEventListener('click', () => {
+        window.location.href = `atividades.html?id=${atividade.IdAtividade}`;
+      });
     })
 
   } catch (error) {
     console.error('Erro ao buscar atividades:', error);
   }
 }
-fetchTop3Atividades() 
+fetchTop3Atividades()
 
 // display de informações de impacto
-
 // Numero de alunos, através do numero de utilizadores com o cargo de utilizador
+
 async function fetchUserCargoData() {
   try {
     const response = await fetch('http://127.0.0.1:3000/Utilizador/')
@@ -244,7 +247,7 @@ fetchUserCargoData();
 // Numero de atividades realizadas, através das atividades que estão concluídas
 
 async function fetchActivitiesFinishedData() {
-  try{
+  try {
     const response = await fetch('http://127.0.0.1:3000/atividades')
     if (!response.ok) {
       throw new Error('Erro ao buscar atividades');
@@ -254,9 +257,10 @@ async function fetchActivitiesFinishedData() {
     console.log('Atividades:', atividades);
     document.getElementById('atividadesRealizadas').textContent = atividades.length;
     // Atribuir um valor as toneladas recicladas, porque é nao temos forma de calcular isso so podemos atribuir um valor arbitrário
-    document.getElementById('toneladasRecicladas').textContent = atividades.length*0.5;
+    document.getElementById('toneladasRecicladas').textContent = atividades.length * 0.5;
   }
   catch (error) {
     console.error('Erro ao buscar dados de impacto:', error);
-  }}
+  }
+}
 fetchActivitiesFinishedData()

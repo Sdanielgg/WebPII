@@ -29,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
         key: 'IdUtilizador'
       }
     },
+    estado: {
+      type: DataTypes.ENUM('Por Realizar', 'Realizada'),
+      defaultValue: 'Por Realizar',
+      allowNull: false
+    },
   }, {
     tableName: 'Atividades',
     timestamps: false
