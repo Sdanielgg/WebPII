@@ -84,7 +84,10 @@ app.use((err, req, res, next) => {
         }
     }
     // other errors
-    res.status(err.statusCode || 500).json({ error: err.message || 'Internal Server Error' });
+    res.status(err.statusCode || 500).json({
+        error: 'Internal server error',
+        message: err.message
+    });
 });
 
 app.listen(port, host, () => {

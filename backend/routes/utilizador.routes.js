@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+const verifyToken = require('../utils/auth');
 const utilizadoresController = require('../controllers/utilizador.controller.js');
 
 
-// Rota protegida — só acedes se estiveres autenticado
-router.get('/privado', (req, res) => {
-  res.json({
-    message: `Bem-vindo, ${req.user.email}. Estás autenticado como ${req.user.role}`
-  });
-});
+router.post('/login', utilizadoresController.loginUser);
+
 
 router.get('/', utilizadoresController.getAllUsers);
 router.get('/:id', utilizadoresController.getUserById);
@@ -18,6 +15,13 @@ router.post('/', utilizadoresController.addUser);
 router.put('/:id', utilizadoresController.updateUser);
 router.delete('/:id', utilizadoresController.removeUser);
 
+// Esta rota só pode ser acedida por quem tiver um token JWT válido
+router.get('/privado', verifyToken, (req, res) => {
+  res.json({
+    message: `Bem-vindo, utilizador com cargo ${req.user.cargo}. Estás autenticado.`,
+    user: req.user
+  });
+});
 
 
 

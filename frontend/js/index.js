@@ -170,8 +170,5 @@ document.addEventListener("DOMContentLoaded", function () {
   updateMultiCarouselPosition();
   AOS.init();
 
-
-
-
 });
 
