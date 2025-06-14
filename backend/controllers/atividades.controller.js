@@ -30,24 +30,11 @@
                 raw: true
             });
 
-            atividades.rows.forEach(atividade => {
-                atividade.links = [
-                    { rel: "self", href: `/atividades/${atividade.IdAtividade}`, method: "GET" },
-                    { rel: "delete", href: `/atividades/${atividade.IdAtividade}`, method: "DELETE" },
-                    { rel: "modify", href: `/atividades/${atividade.IdAtividade}`, method: "PUT" }
-                ];
-            });
-
             return res.status(200).json({
                 totalPages: Math.ceil(atividades.count / limit),
                 currentPage: +page,
                 total: atividades.count,
                 data: atividades.rows,
-                links: [
-                    { rel: "add-atividade", href: `/atividades`, method: "POST" },
-                    ...(page > 1 ? [{ rel: "previous-page", href: `/atividades?limit=${limit}&page=${page - 1}`, method: "GET" }] : []),
-                    ...(atividades.count > page * limit ? [{ rel: "next-page", href: `/atividades?limit=${limit}&page=${+page + 1}`, method: "GET" }] : [])
-                ]
             });
         } catch (err) {
             next(err);
@@ -68,14 +55,7 @@
 
             if (!atividade)
                 throw new ErrorHandler(404, `Cannot find any ATIVIDADE with ID ${req.params.id}.`);
-
             atividade = atividade.toJSON();
-
-            atividade.links = [
-                { rel: "modify", href: `/atividades/${atividade.IdAtividade}`, method: "PUT" },
-                { rel: "delete", href: `/atividades/${atividade.IdAtividade}`, method: "DELETE" }
-            ];
-
             res.status(200).json(atividade);
         } catch (err) {
             next(err);
@@ -95,11 +75,6 @@
             const atividade = await Atividade.create(req.body);
             res.status(201).json({
                 msg: "Atividade successfully created.",
-                links: [
-                    { rel: "self", href: `/atividades/${atividade.IdAtividade}`, method: "GET" },
-                    { rel: "delete", href: `/atividades/${atividade.IdAtividade}`, method: "DELETE" },
-                    { rel: "modify", href: `/atividades/${atividade.IdAtividade}`, method: "PUT" }
-                ]
             });
         } catch (err) {
             next(err);

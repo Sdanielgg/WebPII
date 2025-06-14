@@ -172,3 +172,91 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+// Ultimas atividades
+async function fetchTop3Atividades() {
+  try {
+    const response = await fetch('http://127.0.0.1:3000/atividades/');
+    if (!response.ok) {
+      throw new Error('Erro ao buscar atividades');
+    }
+
+    const data = await response.json();
+    const atividades = data.data; // Adjust if needed
+
+    // Get top 3 by IdAtividade
+    const top3 = atividades
+      .sort((a, b) => b.IdAtividade - a.IdAtividade)
+      .slice(0, 3);
+    top3.reverse()
+    console.log('Top 3 atividades:', top3);
+    const atividadesContainer=document.getElementById('cards');
+    atividadesContainer.innerHTML = ''
+    top3.forEach(atividade=>{
+      const card = document.createElement('div');
+      card.classList.add('card');
+      atividadesContainer.appendChild(card);
+      const titulo = atividade.titulo;
+      const tituloElement = document.createElement('h3');
+      card.appendChild(tituloElement);
+      tituloElement.textContent = titulo;
+      const local = atividade.local;
+      const localElement = document.createElement('p');
+      card.appendChild(localElement);
+      localElement.textContent = local;
+      const data =atividade.data;
+      const dataElement = document.createElement('p');
+      card.appendChild(dataElement);
+      dataElement.textContent = new Date(data).toLocaleDateString('pt-PT', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+      return top3
+    })
+
+  } catch (error) {
+    console.error('Erro ao buscar atividades:', error);
+  }
+}
+fetchTop3Atividades() 
+
+// display de informações de impacto
+
+// Numero de alunos, através do numero de utilizadores com o cargo de utilizador
+async function fetchUserCargoData() {
+  try {
+    const response = await fetch('http://127.0.0.1:3000/Utilizador/')
+    if (!response.ok) {
+      throw new Error('Erro ao buscar utilizadores')
+    }
+    const data = await response.json();
+    const utilizadores = data.data;
+    console.log('Utilizadores:', utilizadores);
+    const alunos = utilizadores.filter(utilizador => utilizador.cargo === 'utilizador').length;
+    console.log(`Número de alunos: ${alunos}`);
+    document.getElementById('alunosEnvolvidos').textContent = alunos;
+  }
+  catch (error) {
+    console.error('Erro ao buscar dados de impacto:', error);
+  }
+}
+fetchUserCargoData();
+// Numero de atividades realizadas, através das atividades que estão concluídas
+
+async function fetchActivitiesFinishedData() {
+  try{
+    const response = await fetch('http://127.0.0.1:3000/atividades')
+    if (!response.ok) {
+      throw new Error('Erro ao buscar atividades');
+    }
+    const data = await response.json();
+    const atividades = data.data;
+    console.log('Atividades:', atividades);
+    document.getElementById('atividadesRealizadas').textContent = atividades.length;
+    // Atribuir um valor as toneladas recicladas, porque é nao temos forma de calcular isso so podemos atribuir um valor arbitrário
+    document.getElementById('toneladasRecicladas').textContent = atividades.length*0.5;
+  }
+  catch (error) {
+    console.error('Erro ao buscar dados de impacto:', error);
+  }}
+fetchActivitiesFinishedData()
