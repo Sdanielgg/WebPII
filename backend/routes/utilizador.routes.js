@@ -23,7 +23,7 @@ router.get('/privado', verifyToken, (req, res) => {
   });
 });
 
-
+ 
 
 
 module.exports = router;

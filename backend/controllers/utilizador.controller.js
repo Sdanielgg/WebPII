@@ -13,7 +13,7 @@ let getAllUsers = async (req, res, next) => {
         return res.status(200).json({
             data: users,
         });
-    }
+    } 
     catch (err) {
         next(err);
     }

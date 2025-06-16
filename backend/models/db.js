@@ -12,7 +12,7 @@ const sequelize = new Sequelize(
     dialect: process.env.DB_DIALECT,
     logging: false,
   }
-);
+); 
 
 // IMPORTAÇÃO DOS MODELS
 const Utilizador = require('./utilizador.model')(sequelize, DataTypes);
