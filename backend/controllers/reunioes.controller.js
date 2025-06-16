@@ -7,7 +7,11 @@ const { ErrorHandler } = require("../utils/error.js"); // Import the ErrorHandle
 let getAllReunioes = async (req, res, next) => {
     try {
         let reunioes = await Reuniao.findAll();
-        return res.status(200).json({
+        if (!reunioes || reunioes.length === 0) {
+            throw new ErrorHandler(404, "No reunioes found.");
+        }
+        reunioes = reunioes.map(reuniao => reuniao.toJSON());
+        res.status(200).json({
             data: reunioes,
         });
     }
@@ -23,11 +27,6 @@ let addReuniao = async (req, res, next) => {
         res.status(201).json({
             msg: "Reuniao successfully created.",
             reuniaoId: reuniao.id,
-            links: [
-                { rel: "self", href: `/reunioes/${reuniao.id}`, method: "GET" },
-                { rel: "modify", href: `/reunioes/${reuniao.id}`, method: "PUT" },
-                { rel: "delete", href: `/reunioes/${reuniao.id}`, method: "DELETE" }
-            ]
         });
     } catch (err) {
         next(err);
@@ -42,7 +41,7 @@ let removeReuniao = async (req, res, next) => {
         }
 
         await reuniao.destroy();
-        res.status(204).send({
+        res.status(200).send({
             msg:`Reuniao with ID${reuniao.id} successfully deleted.`,
         }); 
     } catch (err) {

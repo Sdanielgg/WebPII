@@ -9,6 +9,6 @@ router.get('/:id', inscritosController.getInscritosByAtividadeId);
 // adiciona um inscrito a uma atividade através de um ficheiro JSON que contem o id do utilizador e o id da atividade
 router.post('/', inscritosController.addInscrito);
 // remove um inscrito de uma atividade
-router.delete('/:id', inscritosController.removeInscrito);
+router.delete('/', inscritosController.removeInscrito);
 
 module.exports = router;

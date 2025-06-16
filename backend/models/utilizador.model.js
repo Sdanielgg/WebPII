@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       as: 'medalhas'
     });
     Utilizador.hasMany(models.Reuniao, {
-      foreignKey: 'Criador',
+      foreignKey: 'criador',
       as: 'reunioes'
     });
   };

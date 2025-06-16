@@ -104,9 +104,9 @@
     let deleteAtividade = async (req, res, next) => {
         try {
             let result = await Atividade.destroy({ where: { IdAtividade: req.params.id } });
+            res.status(200).json({msg: "Atividade removida com sucesso."});
             if (result == 0)
                 throw new ErrorHandler(404, `Cannot find any ATIVIDADE with ID ${req.params.id}.`);
-            res.status(204).json();
         } catch (err) {
             next(err);
         }

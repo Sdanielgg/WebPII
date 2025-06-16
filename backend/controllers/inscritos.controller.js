@@ -1,11 +1,16 @@
 const db = require('../models/db.js');
 const Inscritos = db.Inscritos; // Import the Inscrito model from the database connection
+const Atividades = db.Atividades; // Import the Atividades model from the database connection
 
 const { ErrorHandler } = require("../utils/error.js"); // Import the ErrorHandler class
 
 // List all inscritos por reuniao
 let getInscritosByAtividadeId = async (req, res, next) => {
   try {
+    const atividade = await Atividades.findByPk(req.params.id);
+    if (!atividade) {
+      throw new ErrorHandler(404, `Cannot find any ATIVIDADE with ID ${req.params.id}.`);
+    }
     const inscritos = await db.Inscritos.findAll({
       where: { IdAtividade: req.params.id },
       include: [

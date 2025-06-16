@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: true
             }
         },
-        Criador: {
+        criador: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     Reuniao.associate = (models) => {
         Reuniao.belongsTo(models.Utilizador, {
-            foreignKey: 'Criador',
+            foreignKey: 'criador',
             as: 'utilizador'
         });
     };

@@ -6,8 +6,8 @@ const router = express.Router();
 const reunioesController = require('../controllers/reunioes.controller.js');
 
 router.get('/', reunioesController.getAllReunioes);
-router.post('/', reunioesController.addReuniao);
 router.get('/:id', reunioesController.getReuniaoById);
+router.post('/', reunioesController.addReuniao);
 router.delete('/:id', reunioesController.removeReuniao);
 router.put('/:id', reunioesController.updateReuniao);
 module.exports = router;
