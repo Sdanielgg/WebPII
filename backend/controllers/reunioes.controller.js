@@ -1,5 +1,6 @@
 const db = require('../models/db.js'); // Import the database connection
 const Reuniao = db.Reuniao; // Import the Reuniao model
+const Utilizador = db.Utilizador; // Import the Utilizador model
 
 const { ErrorHandler } = require("../utils/error.js"); // Import the ErrorHandler class
 
@@ -50,11 +51,17 @@ let removeReuniao = async (req, res, next) => {
 }
 let getReuniaoById = async (req, res, next) => {
     try {
-        let reuniao = await Reuniao.findByPk(req.params.id);
+        let reuniao = await Reuniao.findByPk(req.params.id, {
+            include: [{
+                model: db.Utilizador,
+                as: 'utilizador', // must match the alias used in your association
+                attributes: ['nomeUtilizador'] // adjust fields as needed
+            }]
+        });
+
         if (!reuniao) {
             throw new ErrorHandler(404, `Cannot find any REUNIAO with ID ${req.params.id}.`);
         } else {
-            reuniao = reuniao.toJSON();
             res.status(200).json(reuniao);
         }
     }
@@ -62,6 +69,7 @@ let getReuniaoById = async (req, res, next) => {
         next(err);
     }
 }
+
 let updateReuniao = async (req, res, next) => {
     try {
         const reuniao = await Reuniao.findByPk(req.params.id);

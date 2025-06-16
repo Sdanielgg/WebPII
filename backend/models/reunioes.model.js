@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         criador: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 1, 
             references: {
                 model: "Utilizadores",
                 key: "IdUtilizador"
