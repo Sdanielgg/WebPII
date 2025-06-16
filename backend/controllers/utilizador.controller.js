@@ -81,17 +81,25 @@ let updateUser = async (req, res, next) => {
             throw new ErrorHandler(404, `Cannot find any USER with ID ${req.params.id}.`);
         }
 
+        // Hash the password if it's being updated
+        if (req.body.password) {
+  
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            req.body.password = hashedPassword;
+        }
+
         await user.update(req.body);
+
         res.status(200).json({
             msg: "User successfully updated.",
             userId: user.id,
-            user: user,
-
+            user: user
         });
+
     } catch (err) {
         next(err);
     }
-}
+};
 
 
 let removeUser = async (req, res, next) => {

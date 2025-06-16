@@ -3,8 +3,10 @@
   <h1>Dashboard</h1>
   <button id="btn">Ver mensagem privada</button>
   <p id="msg"></p>
-  <button>Logout</button>
+  <button id="LogoutBtn">Logout</button>  
   <script>
+    const today= new Date();
+    console.log(today)
     const token = localStorage.getItem('token');
     if (!token) window.location.href = 'login.html';
 
