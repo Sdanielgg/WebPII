@@ -86,7 +86,7 @@ app.use((err, req, res, next) => {
         error: 'Internal server error',
         message: err.message
     });
-});
+}); 
 
 app.listen(port, host, () => {
     console.log(`App listening at http://${host}:${port}/`);

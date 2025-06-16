@@ -35,4 +35,4 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   }
 });
 localStorage.setItem('token', '');
-localStorage.setItem('utilizador','');
+localStorage.setItem('utilizador',''); 
