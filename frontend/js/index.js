@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Ultimas atividades
-async function fetchTop3Atividades() {
+async function fetchTopAtividades() {
   try {
     const response = await fetch('http://127.0.0.1:3000/atividades/');
     if (!response.ok) {
@@ -181,17 +181,15 @@ async function fetchTop3Atividades() {
     }
 
     const data = await response.json();
-    const atividades = data.data; // Adjust if needed
+    const atividades = data.data; 
 
-    // Get top 3 by IdAtividade
-    const top3 = atividades
+    const top = atividades
       .sort((a, b) => b.IdAtividade - a.IdAtividade)
       .slice(0, 3);
-    top3.reverse()
-    console.log('Top 3 atividades:', top3);
+    top.reverse()
     const atividadesContainer = document.getElementById('cards');
     atividadesContainer.innerHTML = ''
-    top3.forEach(atividade => {
+    top.forEach(atividade => {
       const card = document.createElement('div');
       card.classList.add('card');
       atividadesContainer.appendChild(card);
@@ -221,7 +219,7 @@ async function fetchTop3Atividades() {
     console.error('Erro ao buscar atividades:', error);
   }
 }
-fetchTop3Atividades()
+fetchTopAtividades()
 
 // display de informações de impacto
 // Numero de alunos, através do numero de utilizadores com o cargo de utilizador
@@ -264,3 +262,78 @@ async function fetchActivitiesFinishedData() {
   }
 }
 fetchActivitiesFinishedData()
+
+// Display de reunioes, ultima reunião realizada e proximas 3 reuniões caso existam
+async function fetchReunioesData() {
+  try {
+    const response = await fetch('http://127.0.1:3000/reunioes'); 
+    if (!response.ok) {
+      throw new Error('Erro ao buscar reuniões');
+    }
+
+    const data = await response.json();
+    const reunioes = data.data;
+    const reunioesContainer = document.getElementById('reunioes');
+    reunioesContainer.innerHTML = ''
+
+    if (!reunioes || reunioes.length === 0) {
+      reunioesContainer.innerHTML = '<p>Nenhuma reunião agendada.</p>';
+      return;
+    }
+
+    const agora = new Date();
+
+    const reunioesPassadas = reunioes.filter(r => new Date(r.data) < agora);
+    const reunioesFuturas = reunioes.filter(r => new Date(r.data) >= agora);
+    reunioesPassadas.sort((a, b) => new Date(a.data) - new Date(b.data));
+  
+    reunioesFuturas.sort((a, b) => new Date(a.data) - new Date(b.data));
+    // Ultima reuniao feita
+    if (reunioesPassadas.length > 0) {
+      const ultimaReuniao = reunioesPassadas[reunioesPassadas.length - 1];
+      const ultimaReuniaoElement = document.createElement('div');
+      ultimaReuniaoElement.classList.add('card');
+      ultimaReuniaoElement.innerHTML = `
+        <h3>Última Reunião Realizada</h3>
+        <p><strong>Título:</strong> ${ultimaReuniao.titulo}</p>
+        <p><strong>Data:</strong> ${new Date(ultimaReuniao.data).toLocaleDateString('pt-PT')}</p>
+        <p><strong>Local:</strong> ${ultimaReuniao.local}</p>
+      `;
+      ultimaReuniaoElement.addEventListener('click', () => {
+        window.location.href = `reunioes.html?id=${ultimaReuniao.IdReuniao}`;
+      }
+      );
+      reunioesContainer.appendChild(ultimaReuniaoElement);
+    }
+
+    // Próximas 3 reuniões
+    if (reunioesFuturas.length > 0) {
+      const proximasReunioesElement = document.createElement('div');
+      proximasReunioesElement.classList.add('reunioes-proximas');
+      proximasReunioesElement.innerHTML = '<h3>Próximas Reuniões</h3>';
+
+      reunioesFuturas.slice(0, 3).forEach(reuniao => {
+        const reuniaoElement = document.createElement('div');
+        reuniaoElement.classList.add('card');
+        reuniaoElement.innerHTML = `
+          <p><strong>Título:</strong> ${reuniao.titulo}</p>
+          <p><strong>Data:</strong> ${new Date(reuniao.data).toLocaleDateString('pt-PT')}</p>
+          <p><strong>Local:</strong> ${reuniao.local}</p>
+        `;
+        console.log(reuniao)
+        reuniaoElement.addEventListener('click', () => {
+          window.location.href = `reunioes.html?id=${reuniao.IdReuniao}`;
+      });
+        proximasReunioesElement.appendChild(reuniaoElement);
+      });
+
+      reunioesContainer.appendChild(proximasReunioesElement);
+    }
+  } catch (error) {
+    console.error('Erro ao buscar dados de reuniões:', error);
+    const reunioesContainer = document.getElementById('reunioes');
+    reunioesContainer.innerHTML = '<p>Erro ao carregar reuniões.</p>';
+  }
+}
+
+fetchReunioesData();

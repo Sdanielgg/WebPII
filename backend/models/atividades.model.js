@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     estado: {
-      type: DataTypes.ENUM('Por Realizar', 'Realizada'),
+      type: DataTypes.ENUM('Proposta','Por Realizar', 'Realizada'),
       defaultValue: 'Por Realizar',
       allowNull: false
     },
