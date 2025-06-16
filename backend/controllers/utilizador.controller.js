@@ -65,12 +65,7 @@ let addUser = async (req, res, next) => {
         const user = await User.create(req.body);
         res.status(201).json({
             msg: "User successfully created.",
-            userId: user.id,
-            links: [
-                { rel: "self", href: `/utilizadores/${user.id}`, method: "GET" },
-                { rel: "modify", href: `/utilizadores/${user.id}`, method: "PUT" },
-                { rel: "delete", href: `/utilizadores/${user.id}`, method: "DELETE" }
-            ]
+            userId: user.id
         });
     } catch (err) {
         next(err);

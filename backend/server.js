@@ -26,8 +26,6 @@ const cors = require('cors');
 
 app.use(cors());  // Permite todas as origens (modo permissivo)
 
-
-// use route middleware for /posts requests
 app.use('/utilizador', require('./routes/utilizador.routes.js'));
 app.use('/atividades', require('./routes/atividades.routes.js'));
 app.use('/inscritos', require('./routes/inscritos.routes.js'));

@@ -16,21 +16,23 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 })
 
     const data = await response.json();
-
+    console.log(data.user.cargo);
     if (!response.ok) {
       errorMsg.textContent = data.error || 'Erro no login.';
       return;
     }
-
+    if (data.user.cargo === 'utilizador') {
+      window.location.href = 'index.html';
+    } else{
+      window.location.href = 'dashboard.html';
+    }
     // Guardar token no localStorage
     localStorage.setItem('token', data.token);
-    localStorage.setItem('utilizador', JSON.stringify(data.utilizador));
-
-    // Redirecionar para página protegida
-    window.location.href = 'dashboard.html';
-
+    localStorage.setItem('utilizador', JSON.stringify(data.user));
   } catch (error) {
     errorMsg.textContent = 'Erro de rede ou no servidor.';
     console.error(error);
   }
 });
+localStorage.setItem('token', '');
+localStorage.setItem('utilizador','');
