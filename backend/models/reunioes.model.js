@@ -2,15 +2,16 @@ module.exports = (sequelize, DataTypes) => {
     const Reuniao = sequelize.define("Reuniao", {
         IdReuniao: {
             primaryKey: true,
-            autoincrement: true,
+            autoIncrement: true,
             type: DataTypes.INTEGER,
             allowNull: false
         },
+
         titulo: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: { args: [5, 100], msg: "Title must have between 5 to 50 characters." }
+                len: { args: [5, 100], msg: "Title must have between 5 to 100 characters." }
             }
         },
         data: {
@@ -24,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         criador: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: 1, 
+            defaultValue: 1,
             references: {
                 model: "Utilizadores",
                 key: "IdUtilizador"
@@ -46,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         estado: {
-            type: DataTypes.ENUM('Pendente', 'Aprovada', 'Rejeitada'),
+            type: DataTypes.ENUM('Pendente', 'Realizada',),
             defaultValue: 'Pendente',
             allowNull: false
         },

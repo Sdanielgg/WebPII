@@ -99,3 +99,24 @@ async function carregarFotos() {
     }
 }
 carregarFotos();
+// Inscrever utilizador na atividade
+document.getElementById('btnInscrever').addEventListener('click', async () => {
+    try {
+        const response = await fetch(`http://127.0.1:3000/inscritos/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ IdAtividade: atividadeId, IdUtilizador: JSON.parse(localStorage.getItem('utilizador')).id })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Erro ao inscrever na atividade.');
+        }
+
+        alert('Inscrição realizada com sucesso!');
+        fetchAtividadeInscritos(); // Atualiza o número de inscritos
+    } catch (error) {
+        console.error('Erro ao inscrever na atividade:', error);
+        alert('Erro ao inscrever na atividade: ' + error.message);
+    }
+});
