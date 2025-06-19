@@ -1,3 +1,6 @@
+//backend/utilizador.model.js
+
+
 module.exports = (sequelize, DataTypes) => {
   const Utilizador = sequelize.define('Utilizador', {
     IdUtilizador: {

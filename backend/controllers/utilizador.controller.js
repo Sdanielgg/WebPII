@@ -1,3 +1,6 @@
+//backend/utilizador.controller.js
+
+
 const db = require('../models/db.js'); // Import the database connection
 const User = db.Utilizador; // Import the User model from the database connection
 

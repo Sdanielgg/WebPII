@@ -1,0 +1,73 @@
+<!--home.html-->
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eco-Escolas | ESMAD</title>
+  <link rel="stylesheet" href="styles/home.css" />
+</head>
+
+<body>
+  <div class="hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="#quemsomos">Quem Somos</a></li>
+          <li><a href="#atividades">Atividades</a></li>
+          <li><a href="#reunioes">Reuniões</a></li>
+          <li><a href="#perfil">O teu perfil</a></li>
+        </ul>
+      </nav>
+
+      <div class="intro-text">
+        <h1>Bem-vindo ao Eco-Escolas - ESMAD</h1>
+        <p>Uma plataforma dedicada à sustentabilidade, participação e ação ambiental dentro da nossa instituição.</p>
+        <p>Inicia sessão para acompanhar as atividades da tua instituição!</p>
+        <br>
+        <div class="loginCard" id="loginCard">
+          <form id="loginForm">
+            <input type="email" id="email" placeholder="exemplo@email.com" required />
+            <input type="password" id="password" placeholder="Password" required />
+            <button type="submit">Iniciar Sessão</button>
+          </form>
+          <p id="errorMsg" style="color:red;"></p>
+        </div>
+
+        <div id="sessionInfo" class="sessionInfo" style="display: none;">
+          <p>Sessão iniciada</p>
+          <p>Bem-vindo, <span id="username"></span>!</p>
+          <button id="logoutBtn">Terminar Sessão</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrossel -->
+  <div class="carousel-wrapper">
+
+    <div class="carousel-track">
+      <img src="Images/Dashboard_Placeholder.jpeg" alt="Imagem 1" />
+      <img src="Images/eco-escolas_logo.png" alt="Imagem 2" />
+      <img src="Images/esmad-mapa.png" alt="Imagem 3" />
+      <img src="Images/esmad.jpg" alt="Imagem 4" />
+      <img src="Images/planta_fundo.webp" alt="Imagem 5" />
+      <img src="Images/Dashboard_Placeholder.jpeg" alt="Imagem 6" />
+      <img src="Images/eco-escolas_logo.png" alt="Imagem 7" />
+      <img src="Images/esmad-mapa.png" alt="Imagem 8" />
+    </div>        
+    <div class="carousel-indicators"></div>
+
+  </div>
+
+
+  <script src="js/home.js"></script>
+  <script src="js/login.js"></script>
+
+</body>
+
+</html>

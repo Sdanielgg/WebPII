@@ -1,0 +1,231 @@
+:root {
+    /* Paleta de Cores */
+    --verde-escuro: #248232; 
+    --verde-claro: #2BA84A;
+    --preto: #040F0F;
+    --cinzento: #2D3A3A;
+    --branco: #FCFFFC
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  background-image: url('../Images/esmad.jpg'); 
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 50, 0, 0.4); /* fundo esverdeado escuro semi-transparente */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-menu ul {
+  list-style: none;
+}
+
+.nav-menu ul li {
+  margin-bottom: 1rem;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--branco);
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+  color: var(--verde-claro);
+}
+
+.intro-text {
+  max-width: 40%;
+  text-align: left;
+  color: var(--branco);
+}
+
+.intro-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.intro-text p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+
+
+/* LOGIN */
+
+.loginCard {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--branco);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 300px;
+  backdrop-filter: blur(10px);
+  color: var(--branco);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginCard h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--branco);
+}
+
+.loginCard input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 8px;
+}
+
+.loginCard button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--verde-claro);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  color: var(--branco);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.loginCard button:hover {
+  background-color: var(--verde-escuro);
+}
+
+.errorMsg {
+  color: #ff9999;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+
+/* SESSÃO INICIADA */
+
+.sessionInfo {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--branco);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 300px;
+  backdrop-filter: blur(10px);
+  color: var(--branco);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.sessionInfo p {
+  margin: 0.5rem 0;
+}
+
+#logoutBtn {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  background-color: var(--vermelho);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  color: var(--branco);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#logoutBtn:hover {
+  background-color: #cc0000;
+}
+
+
+
+/* CARROSSSEL DE IMAGENS */
+.carousel-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-top: 3rem;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.carousel-track img {
+  flex: 0 0 33.3333%;
+  width: 100%;
+  height: calc(100vw / 3);
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Indicadores por cima das imagens */
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--branco); /* ou var(--verde-claro) */
+  background-color: transparent;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.carousel-indicators button.active {
+  background-color: var(--verde-claro);
+  border-color: var(--verde-claro);
+  opacity: 1;
+}
+
