@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eco-Escolas - ESMAD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/index.css">
+</head>
+
+<body>
+  <button class="menu-button" onclick="toggleMenu()" aria-label="Abrir menu de navegação">☰</button>
+  <button id="scrollTopBtn" title="Voltar ao topo">↑</button>
+
+
+  <div class="side-menu" id="sideMenu">
+    <a href="index.html">Início</a>
+    <a href="quem-somos.html">Quem Somos</a>
+    <a href="login.html">Login / Criar Conta</a>
+    <a href="atividades.html">Atividades</a>
+    <a href="documentos.html">Documentos</a>
+    <a href="reunioes.html">Reuniões</a>
+  </div>
+
+  <header>
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>Eco-Escolas — ESMAD</h1>
+      <p>Unimos sustentabilidade e educação para construir um futuro mais verde. Descobre o nosso projeto.</p>
+      <a href="quem-somos.html">Saber mais →</a>
+    </div>
+  </header>
+
+  <!-- <section id="login">
+    <div class="container login-container">
+      <h2 class="login-title text-center">entra na tua conta!</h2>
+
+      <form class="login-form" id="loginForm">
+        <div class="form-row">
+          <div class="form-group flex-item">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control login-input" placeholder="teu@email.com" required>
+          </div>
+          <div class="form-group flex-item">
+            <label for="password" class="form-label">Palavra-passe</label>
+            <input type="password" id="password" class="form-control login-input" placeholder="••••••••" required>
+          </div>
+        </div>
+        <div class="form-group d-grid">
+          <button type="submit" class="btn login-button">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </section> -->
+
+  <!-- <section class="full-width-carousel">
+    
+    <div class="carousel-container">
+      <div class="carousel-slide-single active">
+        <img src="./Images/esmad-mapa.png" alt="Visão geral do campus da ESMAD">
+      </div>
+      <div class="carousel-slide-single">
+        <img src="./Images/esmad-mapa.png" alt="Alunos em atividade ao ar livre">
+      </div>
+      <div class="carousel-slide-single">
+        <img src="./Images/esmad-mapa.png" alt="Painel solar em edifício da escola">
+      </div>
+      <div class="carousel-slide-single">
+        <img src="./Images/esmad-mapa.png" alt="Horta comunitária da ESMAD">
+      </div>
+      <div class="carousel-slide-single">
+        <img src="./Images/esmad-mapa.png" alt="Edifício principal da ESMAD com vegetação">
+      </div>
+    </div>
+    <div class="carousel-dots-single"></div>
+  </section> -->
+
+  <section class="multi-image-carousel">
+    <h2>Imagens do Projeto</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev-btn" aria-label="Anterior">‹</button>
+      <div class="carousel-track-container">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <img src="./Images/esmad-mapa.png" alt="Alunos plantando árvores">
+          </div>
+          <div class="carousel-slide">
+            <img src="./Images/esmad-mapa.png" alt="Workshop de reciclagem na escola">
+          </div>
+          <div class="carousel-slide">
+            <img src="./Images/esmad-mapa.png" alt="Limpeza da praia com voluntários">
+          </div>
+          <div class="carousel-slide">
+            <img src="./Images/esmad-mapa.png" alt="Crianças aprendendo sobre compostagem">
+          </div>
+          <div class="carousel-slide">
+            <img src="./Images/esmad-mapa.png" alt="Inauguração de horta pedagógica">
+          </div>
+          <div class="carousel-slide">
+            <img src="./Images/esmad-mapa.png" alt="Palestra sobre consumo consciente">
+          </div>
+          <div class="carousel-slide">
+            <img src="./Images/esmad-mapa.png" alt="Exposição de trabalhos de arte com lixo">
+          </div>
+          <div class="carousel-slide">
+            <img src="./Images/esmad-mapa.png" alt="Grupo de Eco-Escolas comemora evento">
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn next-btn" aria-label="Próximo">›</button>
+    </div>
+  </section>
+<section class="listaAtividades">
+  <h2 style="text-align:center; margin-bottom:2rem;">Atividades em Destaque</h2>
+  <div class="cards" id="cards">
+  </div>
+</section>
+
+  <section class="reunioes" id="reunioes">
+    <h2 style="text-align:center; margin-bottom:2rem;">Últimas Atividades</h2>
+    <div class="cards" id="reunioes">
+    </div>
+  </section>
+
+
+  <!-- Secção de Estatísticas -->
+  <section class="estatisticas">
+    <h2>O Nosso Impacto</h2>
+    <div class="stats">
+      <div>
+        <span class="counter" id="alunosEnvolvidos"></span>
+        <p>Alunos envolvidos</p>
+      </div>
+      <div>
+        <span class="counter" id="atividadesRealizadas"></span>
+        <p>Atividades realizadas</p>
+      </div>
+      <div>
+        <span class="counter" id="toneladasRecicladas"></span>
+        <p>Toneladas recicladas</p>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <p>&copy; 2025 Eco-Escolas — ESMAD. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="./js/index.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+
+</html>
