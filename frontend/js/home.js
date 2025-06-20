@@ -1,36 +1,84 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const track = document.querySelector('.carousel-track');
-  const indicators = document.querySelector('.carousel-indicators');
-  const images = track.children;
-  const imageCount = images.length;
-  const imagesPerView = 3;
-  let currentIndex = 0;
+function setupCarousel(carouselClass, indicatorId) {
+    const carousel = document.querySelector(carouselClass);
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const indicatorsContainer = document.getElementById(indicatorId);
 
-  // Criar um indicador por imagem
-  for (let i = 0; i < imageCount; i++) {
-    const dot = document.createElement('button');
-    if (i === 0) dot.classList.add('active');
-    indicators.appendChild(dot);
-  }
+    const visibleSlides = 3;
+    const totalSlides = slides.length;
+    const maxIndex = totalSlides - visibleSlides >= 0 ? totalSlides - visibleSlides : 0;
+    let currentIndex = 0;
 
-  function updateCarousel(index) {
-    // Garante que o índice não excede os limites possíveis
-    const maxIndex = imageCount - imagesPerView;
-    currentIndex = Math.min(Math.max(index, 0), maxIndex);
+    for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('carousel-indicator');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToIndex(i));
+        indicatorsContainer.appendChild(dot);
+    }
 
-    const slideWidth = track.clientWidth / imagesPerView;
-    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    const indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
 
-    // Atualiza os indicadores
-    [...indicators.children].forEach((btn, i) =>
-      btn.classList.toggle('active', i === currentIndex)
-    );
-  }
+    function goToIndex(index) {
+        const offset = (index * 100) / totalSlides;
+        carousel.style.transform = `translateX(-${offset}%)`;
+        indicators.forEach(dot => dot.classList.remove('active'));
+        if (indicators[index]) indicators[index].classList.add('active');
+        currentIndex = index;
+    }
 
-  // Adiciona eventos aos círculos
-  [...indicators.children].forEach((btn, i) => {
-    btn.addEventListener('click', () => updateCarousel(i));
-  });
+    goToIndex(0);
+}
 
-  window.addEventListener('resize', () => updateCarousel(currentIndex));
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupCarousel('.carousel-1', 'carousel-indicators-1');
+    setupCarousel('.carousel-section:nth-of-type(3) .carousel', 'carousel-indicators-2');
+});
+
+function animateCounter(stat) {
+    const target = stat.getAttribute('data-target');
+
+    if (target === '∞') {
+        let count = 0;
+        const maxBeforeInfinity = 100;
+        const duration = 3000;
+        const stepTime = Math.floor(duration / maxBeforeInfinity);
+
+        const update = () => {
+            count++;
+            stat.textContent = count;
+
+            if (count < maxBeforeInfinity) {
+                setTimeout(update, stepTime);
+            } else {
+                stat.textContent = '∞';
+            }
+        };
+
+        update();
+        return;
+    }
+
+    const end = parseInt(target);
+    let count = 0;
+    const duration = 3000;
+    const stepTime = Math.floor(duration / end);
+
+    const update = () => {
+        count++;
+        stat.textContent = count;
+
+        if (count < end) {
+            setTimeout(update, stepTime);
+        } else {
+            stat.textContent = end;
+        }
+    };
+
+    update();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(stat => animateCounter(stat));
 });
