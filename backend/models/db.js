@@ -9,10 +9,14 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
+    dialect: process.env.DB_DIALECT, // 'mysql'
     logging: false,
+    dialectOptions: {
+      charset: 'utf8mb4',  // ou 'utf8'
+    }
   }
-); 
+);
+
 
 // IMPORTAÇÃO DOS MODELS
 const Utilizador = require('./utilizador.model')(sequelize, DataTypes);
