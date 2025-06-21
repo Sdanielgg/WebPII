@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Atividades | Eco-Escolas ESMAD</title>
+  <title>Reunioes | Eco-Escolas ESMAD</title>
   <link rel="stylesheet" href="styles/home.css" />
 </head>
 
@@ -18,19 +18,19 @@
         </ul>
       </nav>
       <div class="intro-text">
-        <h1>Atividades Eco-Escolas</h1>
+        <h1>reunioes Eco-Escolas</h1>
         <p>Explora as iniciativas desenvolvidas ao longo do ano na ESMAD.</p>
       </div>
     </div>
   </header>
 
   <section class="reunioes-sec" id="reunioes">
-    <div class="atividades-content">
-      <h2>Lista de Atividades</h2>
+    <div class="reunioes-content">
+      <h2>Lista de reunioes</h2>
       <p>Conhece as ações promovidas para tornar a nossa escola mais sustentável.</p>
 <br>
-      <div class="atividades-grid" id="atividades-grid">
-        <!-- Cards das atividades serão inseridos aqui via JavaScript -->
+      <div class="reunioes-grid" id="reunioes-grid">
+        <!-- Cards das reunioes serão inseridos aqui via JavaScript -->
       </div>
     </div>
   </section>
@@ -50,44 +50,44 @@
   </footer>
 
   <script>
-    async function carregarAtividades() {
+    async function carregarReunioes() {
       try {
-        const res = await fetch("http://localhost:3000/atividades");
+        const res = await fetch("http://localhost:3000/reunioes");
         const json = await res.json();
 
-        const grid = document.getElementById("atividades-grid");
+        const grid = document.getElementById("reunioes-grid");
         grid.innerHTML = "";
 
         if (!json.data || json.data.length === 0) {
-          grid.innerHTML = "<p>Não existem atividades registadas de momento.</p>";
+          grid.innerHTML = "<p>Não existem reunioes registadas de momento.</p>";
           return;
         }
 
-        json.data.forEach((ativ) => {
+        json.data.forEach((reuniao) => {
           const card = document.createElement("div");
-          card.className = "atividade-card";
+          card.className = "reuniao-card";
 
-          const dataFormatada = new Date(ativ.data).toLocaleDateString("pt-PT");
+          const dataFormatada = new Date(reuniao.data).toLocaleDateString("pt-PT");
           card.innerHTML = `
           <div>
-            <h3>${ativ.titulo}</h3>
-            <p><strong>Local:</strong> ${ativ.local}</p>
+            <h3>${reuniao.titulo}</h3>
+            <p><strong>Local:</strong> ${reuniao.local}</p>
             <p><strong>Data:</strong> ${dataFormatada}</p>
-            <p>${ativ.descricao}</p>
+            <p>${reuniao.ata}</p>
             </div>
             <div>
-             <a onclick="window.location.href = 'atividades.html?id=${ativ.IdAtividade}'">Ver Detalhes</a>
+             <a onclick="window.location.href = 'reunioes.html?id=${reuniao.IdAtividade}'">Ver Detalhes</a>
             </div>
           `;
           grid.appendChild(card);
         });
       } catch (err) {
-        console.error("Erro ao carregar atividades:", err);
-        document.getElementById("atividades-grid").innerHTML = "<p>Erro ao carregar atividades.</p>";
+        console.error("Erro ao carregar reunioes:", err);
+        document.getElementById("reunioes-grid").innerHTML = "<p>Erro ao carregar reunioes.</p>";
       }
     }
 
-    carregarAtividades();
+    carregarReunioes();
   </script>
 </body>
 
