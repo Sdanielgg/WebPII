@@ -67,5 +67,5 @@ document.getElementById('logoutBtn').addEventListener('click', (e) => {
     e.preventDefault();
     localStorage.removeItem('token');
     localStorage.removeItem('utilizador');
-    window.location.href = 'login.html';
+    window.location.href = 'home.html';
 });
