@@ -92,4 +92,11 @@ app.listen(port, host, () => {
     console.log(`App listening at http://${host}:${port}/`);
 });
 
-// console.log("DB_DIALECT:", process.env.DB_DIALECT);
+
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, host, () => {
+    console.log(`App listening at http://${host}:${port}/`);
+  });
+}
+
+module.exports = app;
