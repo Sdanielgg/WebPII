@@ -2,37 +2,39 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>O teu perfil</title>
+  <meta charset="UTF-8">
+  <title>O teu perfil</title>
   <link rel="stylesheet" href="styles/perfil.css" />
 </head>
 
 <body>
-    <button id="backButton" onclick="window.location.href =`./home.html`">Voltar</button>
-    <div class="profile-container">
-        <h2>Perfil</h2>
+  <button id="backButton" onclick="window.location.href =`./home.html`">Voltar</button>
+  <div class="profile-container">
+    <h2>Perfil</h2>
 
-        <div class="username-display">
-            Sessão iniciada em: <strong id="nomeUtilizadorLoggedIn"></strong>
-        </div>
-        <button id="updateFormBtn" onclick="">Editar detalhes</button>
-        <br><br>
-        <form id="updateForm" style="display: none;">
-            <div class="form-group">
-                <label for="name">Mudar Nome</label>
-                <input type="text" id="name" autocomplete="name" name="name" placeholder="New name">
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Mudar Palavra-Passe</label>
-                <input type="password" id="password" name="password" placeholder="New password">
-            </div>
-            
-            <button type="submit">Atualizar Perfil</button>
-        </form>
-        <br>
-        <button id="logoutBtn">Terminar sessão</button>
-    </div>  
-</body>         
+    <div class="username-display">
+      Sessão iniciada em: <strong id="nomeUtilizadorLoggedIn"></strong>
+    </div>
+    <button id="updateFormBtn" onclick="">Editar detalhes</button>
+    <br><br>
+    <form id="updateForm" style="display: none;">
+      <div class="form-group">
+        <label for="name">Mudar Nome</label>
+        <input type="text" id="name" autocomplete="name" name="name" placeholder="New name">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mudar Palavra-Passe</label>
+        <input type="password" id="password" name="password" placeholder="New password">
+      </div>
+
+      <button type="submit">Atualizar Perfil</button>
+    </form>
+    <br>
+    <button id="logoutBtn">Terminar sessão</button>
+  </div>
+
+</body>
 <script src="js/perfil.js"></script>
+
 </html>
