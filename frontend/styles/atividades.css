@@ -1,0 +1,169 @@
+:root {
+  --verde-escuro: #248232;
+  --verde-claro: #2BA84A;
+  --cinzento: #2D3A3A;
+  --branco: #f4f3ed;
+  --preto: #040F0F;
+}
+
+
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--branco);
+  color: var(--preto);
+  line-height: 1.5;
+}
+
+.hero-small {
+  position: relative;
+  height: 30vh;
+  background: url('../Images/Ecoescolas.jpg') center/cover no-repeat;
+}
+
+.hero-small .overlay {
+  position: absolute; inset: 0;
+  background-color: rgba(0, 50, 0, 0.4);
+}
+
+.hero-content-small {
+  position: relative; z-index: 2;
+  display: flex; align-items: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+.btn-back {
+  color: var(--branco);
+  background: var(--verde-claro);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-back:hover {
+  background: var(--verde-escuro);
+}
+
+.activity-details {
+  max-width: 800px;
+  margin: -3rem auto 2rem;
+  background: var(--branco);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.activity-details h1 {
+  font-size: 2rem;
+  color: var(--verde-escuro);
+  margin-bottom: 1rem;
+}
+
+.atv-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.atv-meta span {
+  flex: 1 1 45%;
+}
+
+.descricao {
+  margin-bottom: 1.5rem;
+}
+
+.descricao h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: var(--verde-escuro);
+}
+
+.acao {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.acao button {
+  background: var(--verde-claro);
+  border: none;
+  color: var(--branco);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.acao button:hover {
+  background: var(--verde-escuro);
+}
+
+.fotos-section h2 {
+  font-size: 1.3rem;
+  color: var(--verde-escuro);
+  margin-bottom: 1rem;
+}
+
+.fotosGrid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.fotosGrid img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+.footer {
+  background-color: var(--verde-escuro);
+  color: var(--branco);
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.footer-container {
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-logo {
+  width: 60px;
+  height: auto;
+}
+
+.footer-info {
+  font-size: 0.9rem;
+}
+
+.footer-info a {
+  color: var(--verde-claro);
+  text-decoration: none;
+}
+
+.footer-info a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .atv-meta span {
+    flex: 1 1 100%;
+  }
+}

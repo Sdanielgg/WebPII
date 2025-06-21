@@ -1,68 +1,53 @@
 <!DOCTYPE html>
-<html lang="pt">
-
+<html lang="pt-PT">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eco-Escolas - ESMAD</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles/index.css">
+  <title>Atividade | Eco-Escolas ESMAD</title>
+  <link rel="stylesheet" href="styles/atividades.css" />
 </head>
 <body>
-    <a href="atividadesLista.html"><button>Back</button></a>
-    <h1 id="AtividadeTitulo">Titulo:</h1>
-    <h2 id="AtividadeResponsavel">Responsável:</h2>
-    <h2 id="AtividadeEstado">Estado:</h2>
-    <h2 id="AtividadeLocal">Local:</h2>
-    <h2 id="AtividadeData">Data:</h2>
-    <h2 id="AtividadeDescricao">Descrição:</h2>
-    <div id="DescricaoContainer">
-        <p id="Descricao">
+  <header class="hero-small">
+    <div class="overlay"></div>
+    <div class="hero-content-small">
+      <a href="atividadesLista.html" class="btn-back">← Voltar</a>
+    </div>
+  </header>
+<br><br><br>
+  <main class="activity-details">
+    <h1 id="AtividadeTitulo">Título da Atividade</h1>
+    <div class="atv-meta">
+      <span><strong>Responsável:</strong> <span id="AtividadeResponsavel">Nome</span></span>
+      <span><strong>Estado:</strong> <span id="AtividadeEstado">Aberto</span></span>
+      <span><strong>Local:</strong> <span id="AtividadeLocal">Local...</span></span>
+      <span><strong>Data:</strong> <span id="AtividadeData">DD/MM/AAAA</span></span>
+    </div>
+    <section class="descricao">
+      <h2>Descrição</h2>
+      <p id="AtividadeDescricao">Texto da descrição...</p>
+    </section>
+    <div class="acao">
+      <button id="btnInscrever">Inscrever</button>
+      <span id="AtividadeInscritos">Inscritos: 0</span>
+    </div>
+    <section class="fotos-section">
+      <h2>Fotos da Atividade</h2>
+      <div id="fotosGrid" class="fotosGrid"></div>
+    </section>
+  </main>
 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+  <footer class="footer">
+    <div class="footer-container">
+      <img src="Images/eco-escolas-BRANCO.png" alt="Eco-Escolas" class="footer-logo" />
+      <div class="footer-info">
+        <p>Eco-Escolas – ESMAD</p>
+        <p>Rua D. Sancho I, 981 – 4480-876 Vila do Conde, Portugal</p>
+        <p>T. +351 938 019 355 – E. <a href="mailto:admin@esmad.ipp.pt">admin@esmad.ipp.pt</a></p>
+        <p>© 2025 Eco-Escolas – ESMAD</p>
+      </div>
     </div>
-    <h2 id="AtividadeInscritos">Inscritos:  0</h2>
-    <div>
-    </div>
-    <div>
-        <button id="btnInscrever">Inscrever</button>
-    </div>
-    <div class="fotosContainer">
-        <h2>Fotos da Atividade</h2>
-        <div id="fotosGrid" class="fotosGrid">
+  </footer>
 
-        </div>
-    </div>
-    <script src="js/atividades.js"></script>
+  <script src="js/atividades.js"></script>
 </body>
-<style>
-.foto-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    text-align: center;
-    align-items: center;
-  }
-  .fotosGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Flexible 4-per-row layout */
-    gap: 16px;
-    padding: 20px;
-  }
-
-  .fotosGridImg {
-    width: 12rem;
-    object-fit: cover;
-    border-radius: 8px;
-    display: block;
-  }
-  .fotosGridTitulo {
-    text-align: center;
-  }
-</style>
-
-<div class="photo-grid" id="photoGrid"></div>
-
-</style>
 </html>
