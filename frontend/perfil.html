@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Profile Page</title>
+    <title>O teu perfil</title>
     <style>
         body {
             font-family: 'Kalam', cursive;
@@ -85,30 +85,30 @@
 </head>
 
 <body>
-    <button id="backButton" onclick="window.location.href =`./home.html`">Back</button>
+    <button id="backButton" onclick="window.location.href =`./home.html`">Voltar</button>
     <div class="profile-container">
-        <h2>Profile</h2>
+        <h2>Perfil</h2>
 
         <div class="username-display">
-            Logged in as: <strong id="nomeUtilizadorLoggedIn"></strong>
+            Sessão iniciada em: <strong id="nomeUtilizadorLoggedIn"></strong>
         </div>
-        <button id="updateFormBtn" onclick="">Change Details</button>
+        <button id="updateFormBtn" onclick="">Editar detalhes</button>
         <br><br>
         <form id="updateForm" style="display: none;">
             <div class="form-group">
-                <label for="name">Change Name</label>
+                <label for="name">Mudar Nome</label>
                 <input type="text" id="name" autocomplete="name" name="name" placeholder="New name">
             </div>
             
             <div class="form-group">
-                <label for="password">Change Password</label>
+                <label for="password">Mudar Palavra-Passe</label>
                 <input type="password" id="password" name="password" placeholder="New password">
             </div>
             
-            <button type="submit">Update Profile</button>
+            <button type="submit">Atualizar Perfil</button>
         </form>
         <br>
-        <button id="logoutBtn">Logout</button>
+        <button id="logoutBtn">Terminar sessão</button>
     </div>  
 </body>         
 <script src="js/perfil.js"></script>
