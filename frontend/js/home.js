@@ -82,3 +82,37 @@ window.addEventListener('DOMContentLoaded', () => {
     const stats = document.querySelectorAll('.stat-number');
     stats.forEach(stat => animateCounter(stat));
 });
+
+async function estatisticasLoad() {
+  try {
+    const response = await fetch('http://127.0.0.1:3000/Utilizador/')
+    if (!response.ok) {
+      throw new Error('Erro ao buscar utilizadores')
+    }
+    const data = await response.json();
+    const utilizadores = data.data;
+    console.log('Utilizadores:', utilizadores);
+    const alunos = utilizadores.filter(utilizador => utilizador.cargo === 'utilizador').length;
+    console.log(`Número de alunos: ${alunos}`);
+    document.getElementById('alunosEnvolvidos').textContent = alunos;
+  }
+  catch (error) {
+    console.error('Erro ao buscar dados de impacto:', error);
+  }
+    try {
+        const response = await fetch('http://127.0.1:3000/Atividades/')
+        if (!response.ok) {
+            throw new Error('Erro ao buscar atividades');
+        }
+        const data = await response.json();
+        const atividades = data.data;
+        console.log('Atividades:', atividades);
+        const totalAtividades = atividades.length;
+        console.log(`Número total de atividades: ${totalAtividades}`);
+        document.getElementById('atividadesRealizadas').textContent = totalAtividades;
+    }
+    catch (error) {
+        console.error('Erro ao buscar dados de atividades:', error);
+    }
+}
+estatisticasLoad();

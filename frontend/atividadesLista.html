@@ -1,14 +1,94 @@
 <!DOCTYPE html>
-<html lang="pt">
-<head>
-  <meta charset="UTF-8">
-  <title>Lista de Atividades</title>
-  <link rel="stylesheet" href="styles/atividadesLista.css">
-</head>
-<body>
-  <h1>Atividades</h1>
-  <div id="atividade-lista" class="atividade-lista-container"></div>
+<html lang="pt-PT">
 
-  <script src="js/atividadesLista.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atividades | Eco-Escolas ESMAD</title>
+  <link rel="stylesheet" href="styles/home.css" />
+</head>
+
+<body>
+  <header class="hero" style="height: 60vh; background-image: url('Images/Ecoescolas.jpg');">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="home.html">Início</a></li>
+        </ul>
+      </nav>
+      <div class="intro-text">
+        <h1>Atividades Eco-Escolas</h1>
+        <p>Explora as iniciativas desenvolvidas ao longo do ano na ESMAD.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="reunioes-sec" id="reunioes">
+    <div class="atividades-content">
+      <h2>Lista de Atividades</h2>
+      <p>Conhece as ações promovidas para tornar a nossa escola mais sustentável.</p>
+<br>
+      <div class="atividades-grid" id="atividades-grid">
+        <!-- Cards das atividades serão inseridos aqui via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="Images/eco-escolas-BRANCO.png" alt="Eco-Escolas" />
+      </div>
+      <div class="footer-info">
+        <p>Eco-Escolas - Escola Superior de Media Artes e Design</p>
+        <p>Rua D. Sancho I, n.º 981<br>4480-876 Vila do Conde<br>Portugal</p>
+        <p>T. +351 938 019 355<br>E. <a href="mailto:admin@esmad.ipp.pt">admin@esmad.ipp.pt</a></p>
+        <p>ECO-ESCOLAS - ESMAD © 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    async function carregarAtividades() {
+      try {
+        const res = await fetch("http://localhost:3000/atividades");
+        const json = await res.json();
+
+        const grid = document.getElementById("atividades-grid");
+        grid.innerHTML = "";
+
+        if (!json.data || json.data.length === 0) {
+          grid.innerHTML = "<p>Não existem atividades registadas de momento.</p>";
+          return;
+        }
+
+        json.data.forEach((ativ) => {
+          const card = document.createElement("div");
+          card.className = "atividade-card";
+
+          const dataFormatada = new Date(ativ.data).toLocaleDateString("pt-PT");
+          card.innerHTML = `
+          <div>
+            <h3>${ativ.titulo}</h3>
+            <p><strong>Local:</strong> ${ativ.local}</p>
+            <p><strong>Data:</strong> ${dataFormatada}</p>
+            <p>${ativ.descricao}</p>
+            </div>
+            <div>
+             <button onclick="window.location.href = 'atividades.html?id=${ativ.IdAtividade}'">Ver Detalhes</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Erro ao carregar atividades:", err);
+        document.getElementById("atividades-grid").innerHTML = "<p>Erro ao carregar atividades.</p>";
+      }
+    }
+
+    carregarAtividades();
+  </script>
 </body>
+
 </html>

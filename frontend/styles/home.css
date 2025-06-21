@@ -271,14 +271,14 @@ html {
   margin-bottom: 2rem;
 }
 
-.reunioes-grid {
+.reunioes-grid,.atividades-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
 }
 
-.reuniao-card {
+.reuniao-card, .atividade-card {
   background-color: var(--cinzento);
   color: var(--branco);
   padding: 1.5rem;
@@ -288,18 +288,18 @@ html {
   transition: transform 0.3s;
 }
 
-.reuniao-card h3 {
+.reuniao-card h3, .atividade-card h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   color: var(--verde-claro);
 }
 
-.reuniao-card p {
+.reuniao-card p, .atividade-card p {
   font-size: 1rem;
   margin-bottom: 1rem;
 }
 
-.reuniao-card a {
+.reuniao-card a, .atividade-card a {
   text-decoration: none;
   font-weight: bold;
   color: var(--branco);
@@ -310,7 +310,7 @@ html {
   transition: background-color 0.3s;
 }
 
-.reuniao-card a:hover {
+.reuniao-card a:hover, .atividade-card a:hover {
   background-color: var(--verde-escuro);
 }
 
